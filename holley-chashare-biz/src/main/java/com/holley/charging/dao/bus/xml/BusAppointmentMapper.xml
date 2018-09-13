@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.bus.BusAppointmentMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.bus.BusAppointment" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="PILE_ID" property="pileId" jdbcType="INTEGER" />
+    <result column="APP_NO" property="appNo" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="APP_LEN" property="appLen" jdbcType="INTEGER" />
+    <result column="APP_FEE" property="appFee" jdbcType="DECIMAL" />
+    <result column="APP_STATUS" property="appStatus" jdbcType="SMALLINT" />
+    <result column="PAY_WAY" property="payWay" jdbcType="SMALLINT" />
+    <result column="ACCOUNT_INFO" property="accountInfo" jdbcType="VARCHAR" />
+    <result column="PAY_STATUS" property="payStatus" jdbcType="SMALLINT" />
+    <result column="IS_BILL" property="isBill" jdbcType="SMALLINT" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, PILE_ID, APP_NO, START_TIME, END_TIME, APP_LEN, APP_FEE, APP_STATUS, 
+    PAY_WAY, ACCOUNT_INFO, PAY_STATUS, IS_BILL, ADD_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusAppointmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_appointment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_appointment
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus_appointment
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.bus.BusAppointmentExample" >
+    delete from bus_appointment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.bus.BusAppointment" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_appointment (ID, USER_ID, PILE_ID, 
+      APP_NO, START_TIME, END_TIME, 
+      APP_LEN, APP_FEE, APP_STATUS, 
+      PAY_WAY, ACCOUNT_INFO, PAY_STATUS, 
+      IS_BILL, ADD_TIME)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{pileId,jdbcType=INTEGER}, 
+      #{appNo,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{appLen,jdbcType=INTEGER}, #{appFee,jdbcType=DECIMAL}, #{appStatus,jdbcType=SMALLINT}, 
+      #{payWay,jdbcType=SMALLINT}, #{accountInfo,jdbcType=VARCHAR}, #{payStatus,jdbcType=SMALLINT}, 
+      #{isBill,jdbcType=SMALLINT}, #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.bus.BusAppointment" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_appointment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="pileId != null" >
+        PILE_ID,
+      </if>
+      <if test="appNo != null" >
+        APP_NO,
+      </if>
+      <if test="startTime != null" >
+        START_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="appLen != null" >
+        APP_LEN,
+      </if>
+      <if test="appFee != null" >
+        APP_FEE,
+      </if>
+      <if test="appStatus != null" >
+        APP_STATUS,
+      </if>
+      <if test="payWay != null" >
+        PAY_WAY,
+      </if>
+      <if test="accountInfo != null" >
+        ACCOUNT_INFO,
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS,
+      </if>
+      <if test="isBill != null" >
+        IS_BILL,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="pileId != null" >
+        #{pileId,jdbcType=INTEGER},
+      </if>
+      <if test="appNo != null" >
+        #{appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appLen != null" >
+        #{appLen,jdbcType=INTEGER},
+      </if>
+      <if test="appFee != null" >
+        #{appFee,jdbcType=DECIMAL},
+      </if>
+      <if test="appStatus != null" >
+        #{appStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="payWay != null" >
+        #{payWay,jdbcType=SMALLINT},
+      </if>
+      <if test="accountInfo != null" >
+        #{accountInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="isBill != null" >
+        #{isBill,jdbcType=SMALLINT},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.bus.BusAppointmentExample" resultType="java.lang.Integer" >
+    select count(*) from bus_appointment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_appointment
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pileId != null" >
+        PILE_ID = #{record.pileId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appNo != null" >
+        APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.appLen != null" >
+        APP_LEN = #{record.appLen,jdbcType=INTEGER},
+      </if>
+      <if test="record.appFee != null" >
+        APP_FEE = #{record.appFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.appStatus != null" >
+        APP_STATUS = #{record.appStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.payWay != null" >
+        PAY_WAY = #{record.payWay,jdbcType=SMALLINT},
+      </if>
+      <if test="record.accountInfo != null" >
+        ACCOUNT_INFO = #{record.accountInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payStatus != null" >
+        PAY_STATUS = #{record.payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isBill != null" >
+        IS_BILL = #{record.isBill,jdbcType=SMALLINT},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_appointment
+    set ID = #{record.id,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      PILE_ID = #{record.pileId,jdbcType=INTEGER},
+      APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      APP_LEN = #{record.appLen,jdbcType=INTEGER},
+      APP_FEE = #{record.appFee,jdbcType=DECIMAL},
+      APP_STATUS = #{record.appStatus,jdbcType=SMALLINT},
+      PAY_WAY = #{record.payWay,jdbcType=SMALLINT},
+      ACCOUNT_INFO = #{record.accountInfo,jdbcType=VARCHAR},
+      PAY_STATUS = #{record.payStatus,jdbcType=SMALLINT},
+      IS_BILL = #{record.isBill,jdbcType=SMALLINT},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.bus.BusAppointment" >
+    update bus_appointment
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="pileId != null" >
+        PILE_ID = #{pileId,jdbcType=INTEGER},
+      </if>
+      <if test="appNo != null" >
+        APP_NO = #{appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appLen != null" >
+        APP_LEN = #{appLen,jdbcType=INTEGER},
+      </if>
+      <if test="appFee != null" >
+        APP_FEE = #{appFee,jdbcType=DECIMAL},
+      </if>
+      <if test="appStatus != null" >
+        APP_STATUS = #{appStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="payWay != null" >
+        PAY_WAY = #{payWay,jdbcType=SMALLINT},
+      </if>
+      <if test="accountInfo != null" >
+        ACCOUNT_INFO = #{accountInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS = #{payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="isBill != null" >
+        IS_BILL = #{isBill,jdbcType=SMALLINT},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.bus.BusAppointment" >
+    update bus_appointment
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      PILE_ID = #{pileId,jdbcType=INTEGER},
+      APP_NO = #{appNo,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      APP_LEN = #{appLen,jdbcType=INTEGER},
+      APP_FEE = #{appFee,jdbcType=DECIMAL},
+      APP_STATUS = #{appStatus,jdbcType=SMALLINT},
+      PAY_WAY = #{payWay,jdbcType=SMALLINT},
+      ACCOUNT_INFO = #{accountInfo,jdbcType=VARCHAR},
+      PAY_STATUS = #{payStatus,jdbcType=SMALLINT},
+      IS_BILL = #{isBill,jdbcType=SMALLINT},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

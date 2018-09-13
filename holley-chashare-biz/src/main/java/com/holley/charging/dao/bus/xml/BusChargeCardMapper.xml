@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.bus.BusChargeCardMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.bus.BusChargeCard" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="BUS_NO" property="busNo" jdbcType="VARCHAR" />
+    <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+    <result column="APPLICATION_TYPE" property="applicationType" jdbcType="SMALLINT" />
+    <result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="CARD_TYPE" property="cardType" jdbcType="SMALLINT" />
+    <result column="WORKER" property="worker" jdbcType="INTEGER" />
+    <result column="BAD_RECORD" property="badRecord" jdbcType="VARCHAR" />
+    <result column="USABLE_MONEY" property="usableMoney" jdbcType="DECIMAL" />
+    <result column="FREEZE_MONEY" property="freezeMoney" jdbcType="DECIMAL" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, BUS_NO, CARD_NO, APPLICATION_TYPE, START_TIME, END_TIME, PASSWORD, CARD_TYPE, 
+    WORKER, BAD_RECORD, USABLE_MONEY, FREEZE_MONEY, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusChargeCardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_charge_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_charge_card
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus_charge_card
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.bus.BusChargeCardExample" >
+    delete from bus_charge_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.bus.BusChargeCard" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_charge_card (ID, USER_ID, BUS_NO, 
+      CARD_NO, APPLICATION_TYPE, START_TIME, 
+      END_TIME, PASSWORD, CARD_TYPE, 
+      WORKER, BAD_RECORD, USABLE_MONEY, 
+      FREEZE_MONEY, UPDATE_TIME)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{busNo,jdbcType=VARCHAR}, 
+      #{cardNo,jdbcType=VARCHAR}, #{applicationType,jdbcType=SMALLINT}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, #{cardType,jdbcType=SMALLINT}, 
+      #{worker,jdbcType=INTEGER}, #{badRecord,jdbcType=VARCHAR}, #{usableMoney,jdbcType=DECIMAL}, 
+      #{freezeMoney,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.bus.BusChargeCard" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_charge_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="busNo != null" >
+        BUS_NO,
+      </if>
+      <if test="cardNo != null" >
+        CARD_NO,
+      </if>
+      <if test="applicationType != null" >
+        APPLICATION_TYPE,
+      </if>
+      <if test="startTime != null" >
+        START_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="cardType != null" >
+        CARD_TYPE,
+      </if>
+      <if test="worker != null" >
+        WORKER,
+      </if>
+      <if test="badRecord != null" >
+        BAD_RECORD,
+      </if>
+      <if test="usableMoney != null" >
+        USABLE_MONEY,
+      </if>
+      <if test="freezeMoney != null" >
+        FREEZE_MONEY,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="busNo != null" >
+        #{busNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationType != null" >
+        #{applicationType,jdbcType=SMALLINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=SMALLINT},
+      </if>
+      <if test="worker != null" >
+        #{worker,jdbcType=INTEGER},
+      </if>
+      <if test="badRecord != null" >
+        #{badRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="usableMoney != null" >
+        #{usableMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeMoney != null" >
+        #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.bus.BusChargeCardExample" resultType="java.lang.Integer" >
+    select count(*) from bus_charge_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_charge_card
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.busNo != null" >
+        BUS_NO = #{record.busNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNo != null" >
+        CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicationType != null" >
+        APPLICATION_TYPE = #{record.applicationType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null" >
+        CARD_TYPE = #{record.cardType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.worker != null" >
+        WORKER = #{record.worker,jdbcType=INTEGER},
+      </if>
+      <if test="record.badRecord != null" >
+        BAD_RECORD = #{record.badRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usableMoney != null" >
+        USABLE_MONEY = #{record.usableMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freezeMoney != null" >
+        FREEZE_MONEY = #{record.freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_charge_card
+    set ID = #{record.id,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      BUS_NO = #{record.busNo,jdbcType=VARCHAR},
+      CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      APPLICATION_TYPE = #{record.applicationType,jdbcType=SMALLINT},
+      START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=SMALLINT},
+      WORKER = #{record.worker,jdbcType=INTEGER},
+      BAD_RECORD = #{record.badRecord,jdbcType=VARCHAR},
+      USABLE_MONEY = #{record.usableMoney,jdbcType=DECIMAL},
+      FREEZE_MONEY = #{record.freezeMoney,jdbcType=DECIMAL},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.bus.BusChargeCard" >
+    update bus_charge_card
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="busNo != null" >
+        BUS_NO = #{busNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationType != null" >
+        APPLICATION_TYPE = #{applicationType,jdbcType=SMALLINT},
+      </if>
+      <if test="startTime != null" >
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        CARD_TYPE = #{cardType,jdbcType=SMALLINT},
+      </if>
+      <if test="worker != null" >
+        WORKER = #{worker,jdbcType=INTEGER},
+      </if>
+      <if test="badRecord != null" >
+        BAD_RECORD = #{badRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="usableMoney != null" >
+        USABLE_MONEY = #{usableMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeMoney != null" >
+        FREEZE_MONEY = #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.bus.BusChargeCard" >
+    update bus_charge_card
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      BUS_NO = #{busNo,jdbcType=VARCHAR},
+      CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      APPLICATION_TYPE = #{applicationType,jdbcType=SMALLINT},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      CARD_TYPE = #{cardType,jdbcType=SMALLINT},
+      WORKER = #{worker,jdbcType=INTEGER},
+      BAD_RECORD = #{badRecord,jdbcType=VARCHAR},
+      USABLE_MONEY = #{usableMoney,jdbcType=DECIMAL},
+      FREEZE_MONEY = #{freezeMoney,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

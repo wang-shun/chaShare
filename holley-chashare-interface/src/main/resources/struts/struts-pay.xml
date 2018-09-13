@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">  
+<struts>
+	<package name="pay" namespace="/pay" extends="struts-default">
+		<action name="alipay" class="payAction" method="alipay">
+			<result name="msg">/jsp/pay/payMsg.jsp</result>
+		</action>
+		<action name="payInit" class="payAction" method="payInit">
+			<result name="msg">/jsp/pay/payMsg.jsp</result>
+			<result name="success">/jsp/pay/payInit.jsp</result>
+		</action>
+		<action name="alipayReturn" class="payAction" method="alipayReturn">
+			<result name="success">/jsp/pay/payMsg.jsp</result>
+		</action>
+		<action name="message" class="payAction" method="message">
+			<result name="msg">/jsp/pay/payMsg.jsp</result>
+		</action>
+	</package>
+	<package name="user_json" namespace="/pay" extends="json-default">
+		<!-- <action name="pay_*" class="payAction" method="{1}">
+			<result type="json" />
+		</action> -->
+		<action name="pay_queryPayStatus" class="payAction" method="queryPayStatus">
+			<result type="json">
+			 <param name="root">payStatusBean</param>  
+			</result>
+		</action>
+		<action name="pay_alipayNotify" class="payAction" method="alipayNotify">
+			<result type="json"></result>
+		</action>
+		<action name="pay_wechatPay" class="payAction" method="wechatPay">
+			<result type="json">wechatPayUrl</result>
+		</action>
+		<action name="pay_wechatNotify" class="payAction" method="wechatNotify">
+			<result type="json"></result>
+		</action>
+	</package>
+</struts>

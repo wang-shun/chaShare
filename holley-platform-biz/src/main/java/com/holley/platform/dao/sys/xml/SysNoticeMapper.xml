@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.platform.dao.sys.SysNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.platform.model.sys.SysNotice" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TYPE" property="type" jdbcType="SMALLINT" />
+    <result column="SENT_USER" property="sentUser" jdbcType="INTEGER" />
+    <result column="RECIVE_USER" property="reciveUser" jdbcType="INTEGER" />
+    <result column="MESSAGEID" property="messageid" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="SMALLINT" />
+    <result column="IS_READ" property="isRead" jdbcType="SMALLINT" />
+    <result column="SEND_TIME" property="sendTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="SysNoticeMessageMap" type="com.holley.platform.model.sys.SysNoticeMessage" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="addTime" property="addTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TYPE, SENT_USER, RECIVE_USER, MESSAGEID, STATUS, IS_READ, SEND_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.platform.model.sys.SysNoticeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_notice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_notice
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_notice
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.platform.model.sys.SysNoticeExample" >
+    delete from sys_notice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.platform.model.sys.SysNotice" >
+    insert into sys_notice (ID, TYPE, SENT_USER, 
+      RECIVE_USER, MESSAGEID, STATUS, 
+      IS_READ, SEND_TIME)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=SMALLINT}, #{sentUser,jdbcType=INTEGER}, 
+      #{reciveUser,jdbcType=INTEGER}, #{messageid,jdbcType=INTEGER}, #{status,jdbcType=SMALLINT}, 
+      #{isRead,jdbcType=SMALLINT}, #{sendTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.platform.model.sys.SysNotice" >
+    insert into sys_notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="sentUser != null" >
+        SENT_USER,
+      </if>
+      <if test="reciveUser != null" >
+        RECIVE_USER,
+      </if>
+      <if test="messageid != null" >
+        MESSAGEID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="isRead != null" >
+        IS_READ,
+      </if>
+      <if test="sendTime != null" >
+        SEND_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="sentUser != null" >
+        #{sentUser,jdbcType=INTEGER},
+      </if>
+      <if test="reciveUser != null" >
+        #{reciveUser,jdbcType=INTEGER},
+      </if>
+      <if test="messageid != null" >
+        #{messageid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=SMALLINT},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.platform.model.sys.SysNoticeExample" resultType="java.lang.Integer" >
+    select count(*) from sys_notice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_notice
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=SMALLINT},
+      </if>
+      <if test="record.sentUser != null" >
+        SENT_USER = #{record.sentUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.reciveUser != null" >
+        RECIVE_USER = #{record.reciveUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.messageid != null" >
+        MESSAGEID = #{record.messageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isRead != null" >
+        IS_READ = #{record.isRead,jdbcType=SMALLINT},
+      </if>
+      <if test="record.sendTime != null" >
+        SEND_TIME = #{record.sendTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_notice
+    set ID = #{record.id,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=SMALLINT},
+      SENT_USER = #{record.sentUser,jdbcType=INTEGER},
+      RECIVE_USER = #{record.reciveUser,jdbcType=INTEGER},
+      MESSAGEID = #{record.messageid,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=SMALLINT},
+      IS_READ = #{record.isRead,jdbcType=SMALLINT},
+      SEND_TIME = #{record.sendTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.platform.model.sys.SysNotice" >
+    update sys_notice
+    <set >
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="sentUser != null" >
+        SENT_USER = #{sentUser,jdbcType=INTEGER},
+      </if>
+      <if test="reciveUser != null" >
+        RECIVE_USER = #{reciveUser,jdbcType=INTEGER},
+      </if>
+      <if test="messageid != null" >
+        MESSAGEID = #{messageid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="isRead != null" >
+        IS_READ = #{isRead,jdbcType=SMALLINT},
+      </if>
+      <if test="sendTime != null" >
+        SEND_TIME = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.platform.model.sys.SysNotice" >
+    update sys_notice
+    set TYPE = #{type,jdbcType=SMALLINT},
+      SENT_USER = #{sentUser,jdbcType=INTEGER},
+      RECIVE_USER = #{reciveUser,jdbcType=INTEGER},
+      MESSAGEID = #{messageid,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=SMALLINT},
+      IS_READ = #{isRead,jdbcType=SMALLINT},
+      SEND_TIME = #{sendTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 分页查询消息记录  -->
+  <select id="selectSysNoticeByPage" resultMap="SysNoticeMessageMap" parameterType="java.util.Map" >
+    select 
+    notice.ID id,
+   	message.TITLE title,
+   	message.CONTENT content,
+   	message.ADD_TIME addTime
+    from sys_notice notice
+    left join sys_notice_message message
+    on notice.MESSAGEID = message.ID
+    where notice.RECIVE_USER = #{reciveUserId,jdbcType=INTEGER}
+  	<if test="isRead != null">
+  	and notice.IS_READ = #{isRead,jdbcType=SMALLINT}
+  	</if>
+  	<if test="msgType != null">
+  	and notice.TYPE = #{msgType,jdbcType=SMALLINT}
+  	</if>
+  	order by message.ADD_TIME desc
+  </select>
+    <!-- 查询指定消息记录  -->
+    <select id="selectSysNoticeMessage" resultMap="SysNoticeMessageMap" parameterType="java.util.Map" >
+    select 
+    message.ID id,
+   	message.TITLE title,
+   	message.CONTENT content,
+   	message.ADD_TIME addTime
+    from sys_notice notice
+    left join sys_notice_message message
+    on notice.MESSAGEID = message.ID
+    where notice.RECIVE_USER = #{reciveUserId,jdbcType=INTEGER}
+    and notice.ID = #{noticId,jdbcType=INTEGER}
+  	<if test="isRead != null">
+  	and notice.IS_READ = #{isRead,jdbcType=SMALLINT}
+  	</if>
+  	<if test="msgType != null">
+  	and notice.TYPE = #{msgType,jdbcType=SMALLINT}
+  	</if>
+  </select>
+  <insert id="insertNoticeBatch" parameterType="java.util.List">
+  	insert into sys_notice (ID, TYPE, SENT_USER,RECIVE_USER, MESSAGEID, STATUS, IS_READ, SEND_TIME)
+    values 
+     <foreach collection="list" item="item" index="index" separator=",">
+	    (#{item.id,jdbcType=INTEGER}, #{item.type,jdbcType=SMALLINT}, #{item.sentUser,jdbcType=INTEGER}, 
+	      #{item.reciveUser,jdbcType=INTEGER}, #{item.messageid,jdbcType=INTEGER}, #{item.status,jdbcType=SMALLINT}, 
+	      #{item.isRead,jdbcType=SMALLINT}, #{item.sendTime,jdbcType=TIMESTAMP})
+     </foreach>
+  </insert>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:flex="http://www.springframework.org/schema/flex"
+	xsi:schemaLocation="       
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd       
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd       
+      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd       
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd       
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+      http://www.springframework.org/schema/flex
+      http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"
+	default-autowire="byName">
+
+	<bean id="roleService" class="com.holley.platform.serviceimpl.RoleServiceImpl"/>
+	<bean id="dictionaryService" class="com.holley.platform.serviceimpl.DictionaryServiceImpl"/>
+	<bean id="messageService" class="com.holley.platform.serviceimpl.MessageServiceImpl"/>
+	<bean id="logService" class="com.holley.platform.serviceimpl.LogServiceImpl"/>
+	
+	<bean id="roleUtil" class="com.holley.platform.util.RoleUtil"/>
+	<bean id="logUtil" class="com.holley.platform.util.LogUtil"/>
+	<bean id="msgUtil" class="com.holley.platform.util.MsgUtil"/>
+	<bean id="accountLogUtil" class="com.holley.charging.common.util.AccountLogUtil"/>
+	<bean id="cacheSysHolder" class="com.holley.platform.util.CacheSysHolder" init-method="init"/>
+	
+	<bean id="deviceService" class="com.holley.charging.serviceimpl.bussiness.DeviceServiceImpl"/>
+	
+</beans>

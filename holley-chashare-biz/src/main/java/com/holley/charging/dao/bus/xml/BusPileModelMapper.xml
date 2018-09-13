@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.bus.BusPileModelMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.bus.BusPileModel" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="BRAND" property="brand" jdbcType="VARCHAR" />
+    <result column="CHA_WAY" property="chaWay" jdbcType="SMALLINT" />
+    <result column="CHA_TYPE" property="chaType" jdbcType="SMALLINT" />
+    <result column="NUM" property="num" jdbcType="VARCHAR" />
+    <result column="IS_INTELLIGENT" property="isIntelligent" jdbcType="SMALLINT" />
+    <result column="STANDARD" property="standard" jdbcType="SMALLINT" />
+    <result column="IN_V" property="inV" jdbcType="VARCHAR" />
+    <result column="OUT_V" property="outV" jdbcType="VARCHAR" />
+    <result column="MAX_P" property="maxP" jdbcType="VARCHAR" />
+    <result column="RAT_P" property="ratP" jdbcType="VARCHAR" />
+    <result column="HULL" property="hull" jdbcType="VARCHAR" />
+    <result column="SIZE" property="size" jdbcType="VARCHAR" />
+    <result column="PRO_LEVEL" property="proLevel" jdbcType="VARCHAR" />
+    <result column="LINE_LEN" property="lineLen" jdbcType="VARCHAR" />
+    <result column="RATE" property="rate" jdbcType="VARCHAR" />
+    <result column="MEA_ACC" property="meaAcc" jdbcType="VARCHAR" />
+    <result column="WEIGHT" property="weight" jdbcType="VARCHAR" />
+    <result column="WINDOW" property="window" jdbcType="VARCHAR" />
+    <result column="WORK_TEM" property="workTem" jdbcType="VARCHAR" />
+    <result column="RELA_HUM" property="relaHum" jdbcType="VARCHAR" />
+    <result column="ALTITUDE" property="altitude" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="SMALLINT" />
+    <result column="INS_METHOD" property="insMethod" jdbcType="VARCHAR" />
+    <result column="WORK_STA" property="workSta" jdbcType="VARCHAR" />
+    <result column="IDENTIFY" property="identify" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, BRAND, CHA_WAY, CHA_TYPE, NUM, IS_INTELLIGENT, STANDARD, IN_V, OUT_V, MAX_P, 
+    RAT_P, HULL, SIZE, PRO_LEVEL, LINE_LEN, RATE, MEA_ACC, WEIGHT, WINDOW, WORK_TEM, 
+    RELA_HUM, ALTITUDE, STATUS, INS_METHOD, WORK_STA, IDENTIFY, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusPileModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_pile_model
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_pile_model
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus_pile_model
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.bus.BusPileModelExample" >
+    delete from bus_pile_model
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.bus.BusPileModel"  useGeneratedKeys="true" keyProperty="id">
+    insert into bus_pile_model (ID, BRAND, CHA_WAY, 
+      CHA_TYPE, NUM, IS_INTELLIGENT, 
+      STANDARD, IN_V, OUT_V, 
+      MAX_P, RAT_P, HULL, SIZE, 
+      PRO_LEVEL, LINE_LEN, RATE, 
+      MEA_ACC, WEIGHT, WINDOW, 
+      WORK_TEM, RELA_HUM, ALTITUDE, 
+      STATUS, INS_METHOD, WORK_STA, 
+      IDENTIFY, UPDATE_TIME)
+    values (#{id,jdbcType=INTEGER}, #{brand,jdbcType=VARCHAR}, #{chaWay,jdbcType=SMALLINT}, 
+      #{chaType,jdbcType=SMALLINT}, #{num,jdbcType=VARCHAR}, #{isIntelligent,jdbcType=SMALLINT}, 
+      #{standard,jdbcType=SMALLINT}, #{inV,jdbcType=VARCHAR}, #{outV,jdbcType=VARCHAR}, 
+      #{maxP,jdbcType=VARCHAR}, #{ratP,jdbcType=VARCHAR}, #{hull,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
+      #{proLevel,jdbcType=VARCHAR}, #{lineLen,jdbcType=VARCHAR}, #{rate,jdbcType=VARCHAR}, 
+      #{meaAcc,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, #{window,jdbcType=VARCHAR}, 
+      #{workTem,jdbcType=VARCHAR}, #{relaHum,jdbcType=VARCHAR}, #{altitude,jdbcType=VARCHAR}, 
+      #{status,jdbcType=SMALLINT}, #{insMethod,jdbcType=VARCHAR}, #{workSta,jdbcType=VARCHAR}, 
+      #{identify,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.bus.BusPileModel"  useGeneratedKeys="true" keyProperty="id">
+    insert into bus_pile_model
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="brand != null" >
+        BRAND,
+      </if>
+      <if test="chaWay != null" >
+        CHA_WAY,
+      </if>
+      <if test="chaType != null" >
+        CHA_TYPE,
+      </if>
+      <if test="num != null" >
+        NUM,
+      </if>
+      <if test="isIntelligent != null" >
+        IS_INTELLIGENT,
+      </if>
+      <if test="standard != null" >
+        STANDARD,
+      </if>
+      <if test="inV != null" >
+        IN_V,
+      </if>
+      <if test="outV != null" >
+        OUT_V,
+      </if>
+      <if test="maxP != null" >
+        MAX_P,
+      </if>
+      <if test="ratP != null" >
+        RAT_P,
+      </if>
+      <if test="hull != null" >
+        HULL,
+      </if>
+      <if test="size != null" >
+        SIZE,
+      </if>
+      <if test="proLevel != null" >
+        PRO_LEVEL,
+      </if>
+      <if test="lineLen != null" >
+        LINE_LEN,
+      </if>
+      <if test="rate != null" >
+        RATE,
+      </if>
+      <if test="meaAcc != null" >
+        MEA_ACC,
+      </if>
+      <if test="weight != null" >
+        WEIGHT,
+      </if>
+      <if test="window != null" >
+        WINDOW,
+      </if>
+      <if test="workTem != null" >
+        WORK_TEM,
+      </if>
+      <if test="relaHum != null" >
+        RELA_HUM,
+      </if>
+      <if test="altitude != null" >
+        ALTITUDE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="insMethod != null" >
+        INS_METHOD,
+      </if>
+      <if test="workSta != null" >
+        WORK_STA,
+      </if>
+      <if test="identify != null" >
+        IDENTIFY,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="chaWay != null" >
+        #{chaWay,jdbcType=SMALLINT},
+      </if>
+      <if test="chaType != null" >
+        #{chaType,jdbcType=SMALLINT},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="isIntelligent != null" >
+        #{isIntelligent,jdbcType=SMALLINT},
+      </if>
+      <if test="standard != null" >
+        #{standard,jdbcType=SMALLINT},
+      </if>
+      <if test="inV != null" >
+        #{inV,jdbcType=VARCHAR},
+      </if>
+      <if test="outV != null" >
+        #{outV,jdbcType=VARCHAR},
+      </if>
+      <if test="maxP != null" >
+        #{maxP,jdbcType=VARCHAR},
+      </if>
+      <if test="ratP != null" >
+        #{ratP,jdbcType=VARCHAR},
+      </if>
+      <if test="hull != null" >
+        #{hull,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="proLevel != null" >
+        #{proLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="lineLen != null" >
+        #{lineLen,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=VARCHAR},
+      </if>
+      <if test="meaAcc != null" >
+        #{meaAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="window != null" >
+        #{window,jdbcType=VARCHAR},
+      </if>
+      <if test="workTem != null" >
+        #{workTem,jdbcType=VARCHAR},
+      </if>
+      <if test="relaHum != null" >
+        #{relaHum,jdbcType=VARCHAR},
+      </if>
+      <if test="altitude != null" >
+        #{altitude,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="insMethod != null" >
+        #{insMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="workSta != null" >
+        #{workSta,jdbcType=VARCHAR},
+      </if>
+      <if test="identify != null" >
+        #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.bus.BusPileModelExample" resultType="java.lang.Integer" >
+    select count(*) from bus_pile_model
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_pile_model
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.brand != null" >
+        BRAND = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chaWay != null" >
+        CHA_WAY = #{record.chaWay,jdbcType=SMALLINT},
+      </if>
+      <if test="record.chaType != null" >
+        CHA_TYPE = #{record.chaType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.num != null" >
+        NUM = #{record.num,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isIntelligent != null" >
+        IS_INTELLIGENT = #{record.isIntelligent,jdbcType=SMALLINT},
+      </if>
+      <if test="record.standard != null" >
+        STANDARD = #{record.standard,jdbcType=SMALLINT},
+      </if>
+      <if test="record.inV != null" >
+        IN_V = #{record.inV,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outV != null" >
+        OUT_V = #{record.outV,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxP != null" >
+        MAX_P = #{record.maxP,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ratP != null" >
+        RAT_P = #{record.ratP,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hull != null" >
+        HULL = #{record.hull,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        SIZE = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proLevel != null" >
+        PRO_LEVEL = #{record.proLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineLen != null" >
+        LINE_LEN = #{record.lineLen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rate != null" >
+        RATE = #{record.rate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meaAcc != null" >
+        MEA_ACC = #{record.meaAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null" >
+        WEIGHT = #{record.weight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.window != null" >
+        WINDOW = #{record.window,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workTem != null" >
+        WORK_TEM = #{record.workTem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relaHum != null" >
+        RELA_HUM = #{record.relaHum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.altitude != null" >
+        ALTITUDE = #{record.altitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.insMethod != null" >
+        INS_METHOD = #{record.insMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workSta != null" >
+        WORK_STA = #{record.workSta,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identify != null" >
+        IDENTIFY = #{record.identify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_pile_model
+    set ID = #{record.id,jdbcType=INTEGER},
+      BRAND = #{record.brand,jdbcType=VARCHAR},
+      CHA_WAY = #{record.chaWay,jdbcType=SMALLINT},
+      CHA_TYPE = #{record.chaType,jdbcType=SMALLINT},
+      NUM = #{record.num,jdbcType=VARCHAR},
+      IS_INTELLIGENT = #{record.isIntelligent,jdbcType=SMALLINT},
+      STANDARD = #{record.standard,jdbcType=SMALLINT},
+      IN_V = #{record.inV,jdbcType=VARCHAR},
+      OUT_V = #{record.outV,jdbcType=VARCHAR},
+      MAX_P = #{record.maxP,jdbcType=VARCHAR},
+      RAT_P = #{record.ratP,jdbcType=VARCHAR},
+      HULL = #{record.hull,jdbcType=VARCHAR},
+      SIZE = #{record.size,jdbcType=VARCHAR},
+      PRO_LEVEL = #{record.proLevel,jdbcType=VARCHAR},
+      LINE_LEN = #{record.lineLen,jdbcType=VARCHAR},
+      RATE = #{record.rate,jdbcType=VARCHAR},
+      MEA_ACC = #{record.meaAcc,jdbcType=VARCHAR},
+      WEIGHT = #{record.weight,jdbcType=VARCHAR},
+      WINDOW = #{record.window,jdbcType=VARCHAR},
+      WORK_TEM = #{record.workTem,jdbcType=VARCHAR},
+      RELA_HUM = #{record.relaHum,jdbcType=VARCHAR},
+      ALTITUDE = #{record.altitude,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=SMALLINT},
+      INS_METHOD = #{record.insMethod,jdbcType=VARCHAR},
+      WORK_STA = #{record.workSta,jdbcType=VARCHAR},
+      IDENTIFY = #{record.identify,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.bus.BusPileModel" >
+    update bus_pile_model
+    <set >
+      <if test="brand != null" >
+        BRAND = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="chaWay != null" >
+        CHA_WAY = #{chaWay,jdbcType=SMALLINT},
+      </if>
+      <if test="chaType != null" >
+        CHA_TYPE = #{chaType,jdbcType=SMALLINT},
+      </if>
+      <if test="num != null" >
+        NUM = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="isIntelligent != null" >
+        IS_INTELLIGENT = #{isIntelligent,jdbcType=SMALLINT},
+      </if>
+      <if test="standard != null" >
+        STANDARD = #{standard,jdbcType=SMALLINT},
+      </if>
+      <if test="inV != null" >
+        IN_V = #{inV,jdbcType=VARCHAR},
+      </if>
+      <if test="outV != null" >
+        OUT_V = #{outV,jdbcType=VARCHAR},
+      </if>
+      <if test="maxP != null" >
+        MAX_P = #{maxP,jdbcType=VARCHAR},
+      </if>
+      <if test="ratP != null" >
+        RAT_P = #{ratP,jdbcType=VARCHAR},
+      </if>
+      <if test="hull != null" >
+        HULL = #{hull,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        SIZE = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="proLevel != null" >
+        PRO_LEVEL = #{proLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="lineLen != null" >
+        LINE_LEN = #{lineLen,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        RATE = #{rate,jdbcType=VARCHAR},
+      </if>
+      <if test="meaAcc != null" >
+        MEA_ACC = #{meaAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        WEIGHT = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="window != null" >
+        WINDOW = #{window,jdbcType=VARCHAR},
+      </if>
+      <if test="workTem != null" >
+        WORK_TEM = #{workTem,jdbcType=VARCHAR},
+      </if>
+      <if test="relaHum != null" >
+        RELA_HUM = #{relaHum,jdbcType=VARCHAR},
+      </if>
+      <if test="altitude != null" >
+        ALTITUDE = #{altitude,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="insMethod != null" >
+        INS_METHOD = #{insMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="workSta != null" >
+        WORK_STA = #{workSta,jdbcType=VARCHAR},
+      </if>
+      <if test="identify != null" >
+        IDENTIFY = #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.bus.BusPileModel" >
+    update bus_pile_model
+    set BRAND = #{brand,jdbcType=VARCHAR},
+      CHA_WAY = #{chaWay,jdbcType=SMALLINT},
+      CHA_TYPE = #{chaType,jdbcType=SMALLINT},
+      NUM = #{num,jdbcType=VARCHAR},
+      IS_INTELLIGENT = #{isIntelligent,jdbcType=SMALLINT},
+      STANDARD = #{standard,jdbcType=SMALLINT},
+      IN_V = #{inV,jdbcType=VARCHAR},
+      OUT_V = #{outV,jdbcType=VARCHAR},
+      MAX_P = #{maxP,jdbcType=VARCHAR},
+      RAT_P = #{ratP,jdbcType=VARCHAR},
+      HULL = #{hull,jdbcType=VARCHAR},
+      SIZE = #{size,jdbcType=VARCHAR},
+      PRO_LEVEL = #{proLevel,jdbcType=VARCHAR},
+      LINE_LEN = #{lineLen,jdbcType=VARCHAR},
+      RATE = #{rate,jdbcType=VARCHAR},
+      MEA_ACC = #{meaAcc,jdbcType=VARCHAR},
+      WEIGHT = #{weight,jdbcType=VARCHAR},
+      WINDOW = #{window,jdbcType=VARCHAR},
+      WORK_TEM = #{workTem,jdbcType=VARCHAR},
+      RELA_HUM = #{relaHum,jdbcType=VARCHAR},
+      ALTITUDE = #{altitude,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=SMALLINT},
+      INS_METHOD = #{insMethod,jdbcType=VARCHAR},
+      WORK_STA = #{workSta,jdbcType=VARCHAR},
+      IDENTIFY = #{identify,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

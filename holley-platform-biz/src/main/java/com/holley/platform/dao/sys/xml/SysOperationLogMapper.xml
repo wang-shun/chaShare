@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.platform.dao.sys.SysOperationLogMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.platform.model.sys.SysOperationLog" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="TYPE" property="type" jdbcType="SMALLINT" />
+    <result column="DESCRIBED" property="described" jdbcType="VARCHAR" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="OperationLogResultMap" type="com.holley.platform.model.sys.SysOperationLog" extends="BaseResultMap">
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="USER_TYPE" property="usertype" jdbcType="SMALLINT" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, TYPE, DESCRIBED, IP, ADD_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.platform.model.sys.SysOperationLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_operation_log
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_operation_log
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.platform.model.sys.SysOperationLogExample" >
+    delete from sys_operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.platform.model.sys.SysOperationLog" >
+    insert into sys_operation_log (ID, USER_ID, TYPE, 
+      DESCRIBED, IP, ADD_TIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{type,jdbcType=SMALLINT}, 
+      #{described,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.platform.model.sys.SysOperationLog" >
+    insert into sys_operation_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="described != null" >
+        DESCRIBED,
+      </if>
+      <if test="ip != null" >
+        IP,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="described != null" >
+        #{described,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.platform.model.sys.SysOperationLogExample" resultType="java.lang.Integer" >
+    select count(*) from sys_operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_operation_log
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=SMALLINT},
+      </if>
+      <if test="record.described != null" >
+        DESCRIBED = #{record.described,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        IP = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_operation_log
+    set ID = #{record.id,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=SMALLINT},
+      DESCRIBED = #{record.described,jdbcType=VARCHAR},
+      IP = #{record.ip,jdbcType=VARCHAR},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.platform.model.sys.SysOperationLog" >
+    update sys_operation_log
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="described != null" >
+        DESCRIBED = #{described,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.platform.model.sys.SysOperationLog" >
+    update sys_operation_log
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      TYPE = #{type,jdbcType=SMALLINT},
+      DESCRIBED = #{described,jdbcType=VARCHAR},
+      IP = #{ip,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="insertOperationLogBatch" parameterType="java.util.List" >
+    insert into sys_operation_log (USER_ID, TYPE, DESCRIBED, IP, ADD_TIME
+      )
+    values 
+    <foreach collection="list" item="log" index="index" separator=",">
+    (#{log.userId,jdbcType=INTEGER}, #{log.type,jdbcType=SMALLINT},#{log.described,jdbcType=VARCHAR}, #{log.ip,jdbcType=VARCHAR}, #{log.addTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  
+  <select id="selectOperationLogByPage" parameterType="java.util.Map" resultMap="OperationLogResultMap">
+  	SELECT log.ID,log.USER_ID,log.TYPE,log.DESCRIBED,log.IP,log.ADD_TIME,u.USERNAME,u.PHONE,u.USER_TYPE
+	  FROM sys_operation_log log LEFT JOIN bus_user u
+	    ON log.USER_ID = u.ID
+	    WHERE 1 = 1
+	    <if test="keyword != null">
+			AND (u.USERNAME LIKE concat('%',#{keyword},'%' )  OR u.PHONE LIKE concat('%',#{keyword},'%' )  OR log.DESCRIBED LIKE concat('%',#{keyword},'%' ))
+		</if>
+		<if test="usertype != null">
+			AND u.USER_TYPE = #{usertype}
+		</if>
+		<if test="logtype != null">
+			AND log.TYPE = #{logtype}
+		</if>
+		<if test="operatortype != null">
+			AND (log.DESCRIBED LIKE concat('%',#{operatortype},'%' ))
+		</if>
+		<if test="startdate != null">
+			AND log.ADD_TIME &gt;= #{startdate}
+		</if>
+		<if test="enddate != null">
+			AND log.ADD_TIME &lt; #{enddate}
+		</if>
+		ORDER BY log.ADD_TIME DESC
+  </select>
+</mapper>

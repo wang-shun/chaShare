@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.bus.BusBussinessInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.bus.BusBussinessInfo" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="BUS_NAME" property="busName" jdbcType="VARCHAR" />
+    <result column="LICENCE" property="licence" jdbcType="VARCHAR" />
+    <result column="ACC_REAL_NAME" property="accRealName" jdbcType="VARCHAR" />
+    <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR" />
+    <result column="BANK_ACCOUNT" property="bankAccount" jdbcType="VARCHAR" />
+    <result column="LIMIT_YEAR" property="limitYear" jdbcType="VARCHAR" />
+    <result column="SCALE" property="scale" jdbcType="VARCHAR" />
+    <result column="BUS_DOMAIN" property="busDomain" jdbcType="VARCHAR" />
+    <result column="DOMAIN" property="domain" jdbcType="VARCHAR" />
+    <result column="COUNTRY" property="country" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="INTEGER" />
+    <result column="CITY" property="city" jdbcType="INTEGER" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="LICENCE_IMG" property="licenceImg" jdbcType="VARCHAR" />
+    <result column="CORPORATE_IMG" property="corporateImg" jdbcType="VARCHAR" />
+    <result column="TRANSATOR_IMG" property="transatorImg" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, BUS_NAME, LICENCE, ACC_REAL_NAME, BANK_NAME, BANK_ACCOUNT, LIMIT_YEAR, SCALE, 
+    BUS_DOMAIN, DOMAIN, COUNTRY, PROVINCE, CITY, ADDRESS, TEL, LICENCE_IMG, CORPORATE_IMG, 
+    TRANSATOR_IMG, ADD_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusBussinessInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_bussiness_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_bussiness_info
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus_bussiness_info
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.bus.BusBussinessInfoExample" >
+    delete from bus_bussiness_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.bus.BusBussinessInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_bussiness_info (ID, BUS_NAME, LICENCE, 
+      ACC_REAL_NAME, BANK_NAME, BANK_ACCOUNT, 
+      LIMIT_YEAR, SCALE, BUS_DOMAIN, 
+      DOMAIN, COUNTRY, PROVINCE, 
+      CITY, ADDRESS, TEL, 
+      LICENCE_IMG, CORPORATE_IMG, TRANSATOR_IMG, 
+      ADD_TIME)
+    values (#{id,jdbcType=INTEGER}, #{busName,jdbcType=VARCHAR}, #{licence,jdbcType=VARCHAR}, 
+      #{accRealName,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR}, 
+      #{limitYear,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, #{busDomain,jdbcType=VARCHAR}, 
+      #{domain,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=INTEGER}, 
+      #{city,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{licenceImg,jdbcType=VARCHAR}, #{corporateImg,jdbcType=VARCHAR}, #{transatorImg,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.bus.BusBussinessInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_bussiness_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="busName != null" >
+        BUS_NAME,
+      </if>
+      <if test="licence != null" >
+        LICENCE,
+      </if>
+      <if test="accRealName != null" >
+        ACC_REAL_NAME,
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME,
+      </if>
+      <if test="bankAccount != null" >
+        BANK_ACCOUNT,
+      </if>
+      <if test="limitYear != null" >
+        LIMIT_YEAR,
+      </if>
+      <if test="scale != null" >
+        SCALE,
+      </if>
+      <if test="busDomain != null" >
+        BUS_DOMAIN,
+      </if>
+      <if test="domain != null" >
+        DOMAIN,
+      </if>
+      <if test="country != null" >
+        COUNTRY,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="tel != null" >
+        TEL,
+      </if>
+      <if test="licenceImg != null" >
+        LICENCE_IMG,
+      </if>
+      <if test="corporateImg != null" >
+        CORPORATE_IMG,
+      </if>
+      <if test="transatorImg != null" >
+        TRANSATOR_IMG,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="busName != null" >
+        #{busName,jdbcType=VARCHAR},
+      </if>
+      <if test="licence != null" >
+        #{licence,jdbcType=VARCHAR},
+      </if>
+      <if test="accRealName != null" >
+        #{accRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="limitYear != null" >
+        #{limitYear,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null" >
+        #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="busDomain != null" >
+        #{busDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null" >
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="licenceImg != null" >
+        #{licenceImg,jdbcType=VARCHAR},
+      </if>
+      <if test="corporateImg != null" >
+        #{corporateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="transatorImg != null" >
+        #{transatorImg,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.bus.BusBussinessInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bus_bussiness_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_bussiness_info
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.busName != null" >
+        BUS_NAME = #{record.busName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licence != null" >
+        LICENCE = #{record.licence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accRealName != null" >
+        ACC_REAL_NAME = #{record.accRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAccount != null" >
+        BANK_ACCOUNT = #{record.bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitYear != null" >
+        LIMIT_YEAR = #{record.limitYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scale != null" >
+        SCALE = #{record.scale,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busDomain != null" >
+        BUS_DOMAIN = #{record.busDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domain != null" >
+        DOMAIN = #{record.domain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null" >
+        COUNTRY = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        PROVINCE = #{record.province,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null" >
+        CITY = #{record.city,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        TEL = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenceImg != null" >
+        LICENCE_IMG = #{record.licenceImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporateImg != null" >
+        CORPORATE_IMG = #{record.corporateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transatorImg != null" >
+        TRANSATOR_IMG = #{record.transatorImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_bussiness_info
+    set ID = #{record.id,jdbcType=INTEGER},
+      BUS_NAME = #{record.busName,jdbcType=VARCHAR},
+      LICENCE = #{record.licence,jdbcType=VARCHAR},
+      ACC_REAL_NAME = #{record.accRealName,jdbcType=VARCHAR},
+      BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      BANK_ACCOUNT = #{record.bankAccount,jdbcType=VARCHAR},
+      LIMIT_YEAR = #{record.limitYear,jdbcType=VARCHAR},
+      SCALE = #{record.scale,jdbcType=VARCHAR},
+      BUS_DOMAIN = #{record.busDomain,jdbcType=VARCHAR},
+      DOMAIN = #{record.domain,jdbcType=VARCHAR},
+      COUNTRY = #{record.country,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=INTEGER},
+      CITY = #{record.city,jdbcType=INTEGER},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      TEL = #{record.tel,jdbcType=VARCHAR},
+      LICENCE_IMG = #{record.licenceImg,jdbcType=VARCHAR},
+      CORPORATE_IMG = #{record.corporateImg,jdbcType=VARCHAR},
+      TRANSATOR_IMG = #{record.transatorImg,jdbcType=VARCHAR},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.bus.BusBussinessInfo" >
+    update bus_bussiness_info
+    <set >
+      <if test="busName != null" >
+        BUS_NAME = #{busName,jdbcType=VARCHAR},
+      </if>
+      <if test="licence != null" >
+        LICENCE = #{licence,jdbcType=VARCHAR},
+      </if>
+      <if test="accRealName != null" >
+        ACC_REAL_NAME = #{accRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="limitYear != null" >
+        LIMIT_YEAR = #{limitYear,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null" >
+        SCALE = #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="busDomain != null" >
+        BUS_DOMAIN = #{busDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null" >
+        DOMAIN = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        COUNTRY = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="licenceImg != null" >
+        LICENCE_IMG = #{licenceImg,jdbcType=VARCHAR},
+      </if>
+      <if test="corporateImg != null" >
+        CORPORATE_IMG = #{corporateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="transatorImg != null" >
+        TRANSATOR_IMG = #{transatorImg,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.bus.BusBussinessInfo" >
+    update bus_bussiness_info
+    set BUS_NAME = #{busName,jdbcType=VARCHAR},
+      LICENCE = #{licence,jdbcType=VARCHAR},
+      ACC_REAL_NAME = #{accRealName,jdbcType=VARCHAR},
+      BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      LIMIT_YEAR = #{limitYear,jdbcType=VARCHAR},
+      SCALE = #{scale,jdbcType=VARCHAR},
+      BUS_DOMAIN = #{busDomain,jdbcType=VARCHAR},
+      DOMAIN = #{domain,jdbcType=VARCHAR},
+      COUNTRY = #{country,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=INTEGER},
+      CITY = #{city,jdbcType=INTEGER},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      LICENCE_IMG = #{licenceImg,jdbcType=VARCHAR},
+      CORPORATE_IMG = #{corporateImg,jdbcType=VARCHAR},
+      TRANSATOR_IMG = #{transatorImg,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

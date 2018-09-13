@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.holley.charging.dao.dcs.DcsMonitorMapper">
+  <resultMap id="BaseResultMap" type="com.holley.common.dataobject.charging.dcs.DcsMonitor">
+    <id column="PILE_ID" jdbcType="INTEGER" property="pileId" />
+    <result column="CHA_LEN" jdbcType="INTEGER" property="chaLen" />
+    <result column="CHA_POWER" jdbcType="DOUBLE" property="chaPower" />
+    <result column="MONEY" jdbcType="DECIMAL" property="money" />
+    <result column="OUT_V" jdbcType="VARCHAR" property="outV" />
+    <result column="OUT_I" jdbcType="VARCHAR" property="outI" />
+    <result column="STATUS" jdbcType="SMALLINT" property="status" />
+    <result column="IS_ONLINE" jdbcType="SMALLINT" property="isOnline" />
+    <result column="IS_CHARGING" jdbcType="SMALLINT" property="isCharging" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PILE_ID, CHA_LEN, CHA_POWER, MONEY, OUT_V, OUT_I, STATUS, IS_ONLINE, IS_CHARGING, 
+    UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.holley.charging.model.dcs.DcsMonitorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dcs_monitor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dcs_monitor
+    where PILE_ID = #{pileId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dcs_monitor
+    where PILE_ID = #{pileId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.dcs.DcsMonitorExample">
+    delete from dcs_monitor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.common.dataobject.charging.dcs.DcsMonitor">
+    insert into dcs_monitor (PILE_ID, CHA_LEN, CHA_POWER, 
+      MONEY, OUT_V, OUT_I, 
+      STATUS, IS_ONLINE, IS_CHARGING, 
+      UPDATE_TIME)
+    values (#{pileId,jdbcType=INTEGER}, #{chaLen,jdbcType=INTEGER}, #{chaPower,jdbcType=DOUBLE}, 
+      #{money,jdbcType=DECIMAL}, #{outV,jdbcType=VARCHAR}, #{outI,jdbcType=VARCHAR}, 
+      #{status,jdbcType=SMALLINT}, #{isOnline,jdbcType=SMALLINT}, #{isCharging,jdbcType=SMALLINT}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.common.dataobject.charging.dcs.DcsMonitor">
+    insert into dcs_monitor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pileId != null">
+        PILE_ID,
+      </if>
+      <if test="chaLen != null">
+        CHA_LEN,
+      </if>
+      <if test="chaPower != null">
+        CHA_POWER,
+      </if>
+      <if test="money != null">
+        MONEY,
+      </if>
+      <if test="outV != null">
+        OUT_V,
+      </if>
+      <if test="outI != null">
+        OUT_I,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="isOnline != null">
+        IS_ONLINE,
+      </if>
+      <if test="isCharging != null">
+        IS_CHARGING,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pileId != null">
+        #{pileId,jdbcType=INTEGER},
+      </if>
+      <if test="chaLen != null">
+        #{chaLen,jdbcType=INTEGER},
+      </if>
+      <if test="chaPower != null">
+        #{chaPower,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="outV != null">
+        #{outV,jdbcType=VARCHAR},
+      </if>
+      <if test="outI != null">
+        #{outI,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="isOnline != null">
+        #{isOnline,jdbcType=SMALLINT},
+      </if>
+      <if test="isCharging != null">
+        #{isCharging,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.dcs.DcsMonitorExample" resultType="java.lang.Integer">
+    select count(*) from dcs_monitor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dcs_monitor
+    <set>
+      <if test="record.pileId != null">
+        PILE_ID = #{record.pileId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chaLen != null">
+        CHA_LEN = #{record.chaLen,jdbcType=INTEGER},
+      </if>
+      <if test="record.chaPower != null">
+        CHA_POWER = #{record.chaPower,jdbcType=DOUBLE},
+      </if>
+      <if test="record.money != null">
+        MONEY = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.outV != null">
+        OUT_V = #{record.outV,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outI != null">
+        OUT_I = #{record.outI,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isOnline != null">
+        IS_ONLINE = #{record.isOnline,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isCharging != null">
+        IS_CHARGING = #{record.isCharging,jdbcType=SMALLINT},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dcs_monitor
+    set PILE_ID = #{record.pileId,jdbcType=INTEGER},
+      CHA_LEN = #{record.chaLen,jdbcType=INTEGER},
+      CHA_POWER = #{record.chaPower,jdbcType=DOUBLE},
+      MONEY = #{record.money,jdbcType=DECIMAL},
+      OUT_V = #{record.outV,jdbcType=VARCHAR},
+      OUT_I = #{record.outI,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=SMALLINT},
+      IS_ONLINE = #{record.isOnline,jdbcType=SMALLINT},
+      IS_CHARGING = #{record.isCharging,jdbcType=SMALLINT},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.common.dataobject.charging.dcs.DcsMonitor">
+    update dcs_monitor
+    <set>
+      <if test="chaLen != null">
+        CHA_LEN = #{chaLen,jdbcType=INTEGER},
+      </if>
+      <if test="chaPower != null">
+        CHA_POWER = #{chaPower,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        MONEY = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="outV != null">
+        OUT_V = #{outV,jdbcType=VARCHAR},
+      </if>
+      <if test="outI != null">
+        OUT_I = #{outI,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="isOnline != null">
+        IS_ONLINE = #{isOnline,jdbcType=SMALLINT},
+      </if>
+      <if test="isCharging != null">
+        IS_CHARGING = #{isCharging,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PILE_ID = #{pileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.common.dataobject.charging.dcs.DcsMonitor">
+    update dcs_monitor
+    set CHA_LEN = #{chaLen,jdbcType=INTEGER},
+      CHA_POWER = #{chaPower,jdbcType=DOUBLE},
+      MONEY = #{money,jdbcType=DECIMAL},
+      OUT_V = #{outV,jdbcType=VARCHAR},
+      OUT_I = #{outI,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=SMALLINT},
+      IS_ONLINE = #{isOnline,jdbcType=SMALLINT},
+      IS_CHARGING = #{isCharging,jdbcType=SMALLINT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where PILE_ID = #{pileId,jdbcType=INTEGER}
+  </update>
+ 
+</mapper>

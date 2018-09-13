@@ -1,0 +1,263 @@
+body{
+    background-color: #f4f4f4;
+    font-size: 14px;
+}
+.header{
+    background-color: #0b95f0;
+    color: #fff;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+.header img{
+    width: 100%;
+}
+.header h1{
+    font-size: 20px;
+}
+.banner>img{
+    width: 100%;
+}
+.banner{
+    position: relative;
+}
+.banner .dowload{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(243,242,242,.9);
+    padding: 10px 0;
+}
+.banner .dowload h1{
+    font-size: 18px;
+    height: 18px;
+    line-height: 18px;
+    color: #0b95f0;
+    font-weight: bold;
+}
+.banner .dowload p{
+    line-height: 16px;
+    font-size: 16px;
+    height: 16px;
+    margin-top: 5px;
+}
+.dowload .img{
+    width: 40px;
+    margin-right: 10px;
+    margin-left: 15px;
+}
+.dowload .img img{
+    width: 100%;
+}
+.dowload .butt{
+    background-color: #0b95f0;
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-top: 3px;
+    font-size: 16px;
+    line-height: 16px;
+    margin-right: 15px;
+}
+.info{
+    background-color: #fff;
+}
+.info-box{
+    width: 91.66%;
+    margin: 0 auto;
+}
+.info-box li{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.info-box .cap{
+    border-bottom: 1px dotted #dcdfe1;
+}
+.info-box h1{
+    font-size: 18px;
+    height: 20px;
+    line-height: 20px;
+}
+.info-class{
+    border-bottom: 1px dotted #dcdfe1;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+}
+.info-class i{
+    float: left;
+    margin-right: 5px;
+}
+.info-class .fast{
+    background: url("../img/home_3.png") no-repeat;
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+}
+.info-class .packed{
+    background: url("../img/home_4.png") no-repeat;
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+}
+.info-class span{
+    float: left;
+    color: #777;
+    margin-right: 5px;
+}
+.info-class em{
+    font-style: normal;
+    color: #ccc;
+    margin-right: 5px;
+}
+.info-class b{
+    color: #999;
+}
+.info-addr{
+    font-size: 14px;
+    color: #444;
+    padding-left: 25px;
+    background: url("../img/home_16.png") no-repeat 0 center;
+    background-size: 20px;
+}
+.info-tel{
+    font-size: 14px;
+    color: #444;
+    padding-left: 25px;
+    background: url("../img/home_41.png") no-repeat 0 center;
+    background-size: 20px;
+    margin-top: 10px;
+}
+.list{
+    background-color: #fff;
+    margin-top: 10px;
+}
+.list dd{
+    border-bottom: 1px solid #f4f4f4;
+}
+.list-cap{
+    width: 91.66%;
+    margin: 0 auto;
+    padding-top: 25px;
+    padding-bottom: 10px;
+}
+.xingx{
+    line-height: 18px;
+    height: 15px;
+}
+.xingx span{
+    float: left;
+    color: #999;
+    margin-right: 5px;
+}
+.xingx i{
+    float: left;
+    margin-right: 3px;
+}
+.xingx .n1{
+    background: url("../img/home_8.png") no-repeat;
+    background-size: 100%;
+    width: 15px;
+    height: 15px;
+}
+.xingx .n2{
+    background: url("../img/home_9.png") no-repeat;
+    background-size: 100%;
+    width: 15px;
+    height: 15px;
+}
+.xingx .n3{
+    background: url("../img/home_10.png") no-repeat;
+    background-size: 100%;
+    width: 15px;
+    height: 15px;
+}
+.xingx b{
+    float: left;
+    color: #ffaa0b;
+    margin-left: 5px;
+}
+.list-top{
+    width: 91.66%;
+    margin: 0 auto;
+    padding: 15px 0;
+    border-bottom: 1px dotted #dcdfe1;
+}
+.list-top .img{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.list-top .img img{
+    width: 100%;
+    height:100%;
+}
+.list-top .text{
+    margin-left: 15px;
+}
+.list-top span{
+    display: block;
+    color: #333;
+}
+.list-top .time{
+    color: #bbb;
+}
+.list-text{
+    width: 91.66%;
+    margin: 0 auto;
+    padding: 15px 0;
+}
+.list-text p{
+    margin: 5px 0;
+}
+.list-text .img{
+    float: left;
+    width: 80px;
+    height: 80px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.list-text .img img{
+    width: 100%;
+}
+.info-text{
+    background-color: #fff;
+    min-height: 100%;
+}
+.info-text .cap{
+    width: 91.94%;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.info-text .cap span{
+    font-size: 16px;
+    color: #222222;
+    font-weight: bold;
+    height: 16px;
+    line-height: 16px;
+}
+.info-text .text{
+    padding: 15px 0;
+    width: 91.94%;
+    margin: 0 auto;
+    color: #666;
+}
+.info-text .text p{
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+

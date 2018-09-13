@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>	
+	<!-- JSON配置 -->
+	<package name="json-base" namespace="/" extends="json-default">
+        <interceptors>
+        <!-- 用于注释形式添加拦截器 -->
+    		<interceptor name="annoInterceptor" class="com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor"></interceptor>
+            <interceptor name="jsonError" class="com.holley.charging.intercepter.JsonErrorInterceptor"></interceptor>
+            <interceptor-stack name="commonstack">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="annoInterceptor"></interceptor-ref>
+                <interceptor-ref name="jsonError"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="commonstack"></default-interceptor-ref>
+        
+        <global-results>  
+           <result name="errorjson" type="json">  
+            <param name="root">resultBean</param>                  
+           </result>  
+       </global-results>  
+    </package>
+	<include file="struts/struts-share.xml" />
+	<include file="struts/struts-pay.xml" />
+</struts>

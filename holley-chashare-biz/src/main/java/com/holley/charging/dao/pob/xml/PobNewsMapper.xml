@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.pob.PobNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.pob.PobNews" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TYPE" property="type" jdbcType="SMALLINT" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SUMMARY" property="summary" jdbcType="VARCHAR" />
+    <result column="PICTURE" property="picture" jdbcType="VARCHAR" />
+    <result column="PUBLISHER" property="publisher" jdbcType="VARCHAR" />
+    <result column="PUBLISHDATE" property="publishdate" jdbcType="DATE" />
+    <result column="STATUS" property="status" jdbcType="SMALLINT" />
+    <result column="ORDERBY" property="orderby" jdbcType="SMALLINT" />
+    <result column="VISITCOUNT" property="visitcount" jdbcType="INTEGER" />
+    <result column="ISTOP" property="istop" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TYPE, TITLE, SUMMARY, PICTURE, PUBLISHER, PUBLISHDATE, STATUS, ORDERBY, VISITCOUNT, 
+    ISTOP
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.holley.charging.model.pob.PobNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pob_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.pob.PobNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pob_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pob_news
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pob_news
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.pob.PobNewsExample" >
+    delete from pob_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.pob.PobNews" >
+    insert into pob_news (ID, TYPE, TITLE, 
+      SUMMARY, PICTURE, PUBLISHER, 
+      PUBLISHDATE, STATUS, ORDERBY, 
+      VISITCOUNT, ISTOP, CONTENT
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=SMALLINT}, #{title,jdbcType=VARCHAR}, 
+      #{summary,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR}, 
+      #{publishdate,jdbcType=DATE}, #{status,jdbcType=SMALLINT}, #{orderby,jdbcType=SMALLINT}, 
+      #{visitcount,jdbcType=INTEGER}, #{istop,jdbcType=SMALLINT}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.pob.PobNews" >
+    insert into pob_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="summary != null" >
+        SUMMARY,
+      </if>
+      <if test="picture != null" >
+        PICTURE,
+      </if>
+      <if test="publisher != null" >
+        PUBLISHER,
+      </if>
+      <if test="publishdate != null" >
+        PUBLISHDATE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="orderby != null" >
+        ORDERBY,
+      </if>
+      <if test="visitcount != null" >
+        VISITCOUNT,
+      </if>
+      <if test="istop != null" >
+        ISTOP,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="publishdate != null" >
+        #{publishdate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=SMALLINT},
+      </if>
+      <if test="visitcount != null" >
+        #{visitcount,jdbcType=INTEGER},
+      </if>
+      <if test="istop != null" >
+        #{istop,jdbcType=SMALLINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.pob.PobNewsExample" resultType="java.lang.Integer" >
+    select count(*) from pob_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pob_news
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=SMALLINT},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        SUMMARY = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null" >
+        PICTURE = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publisher != null" >
+        PUBLISHER = #{record.publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishdate != null" >
+        PUBLISHDATE = #{record.publishdate,jdbcType=DATE},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.orderby != null" >
+        ORDERBY = #{record.orderby,jdbcType=SMALLINT},
+      </if>
+      <if test="record.visitcount != null" >
+        VISITCOUNT = #{record.visitcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.istop != null" >
+        ISTOP = #{record.istop,jdbcType=SMALLINT},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update pob_news
+    set ID = #{record.id,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=SMALLINT},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      SUMMARY = #{record.summary,jdbcType=VARCHAR},
+      PICTURE = #{record.picture,jdbcType=VARCHAR},
+      PUBLISHER = #{record.publisher,jdbcType=VARCHAR},
+      PUBLISHDATE = #{record.publishdate,jdbcType=DATE},
+      STATUS = #{record.status,jdbcType=SMALLINT},
+      ORDERBY = #{record.orderby,jdbcType=SMALLINT},
+      VISITCOUNT = #{record.visitcount,jdbcType=INTEGER},
+      ISTOP = #{record.istop,jdbcType=SMALLINT},
+      CONTENT = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pob_news
+    set ID = #{record.id,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=SMALLINT},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      SUMMARY = #{record.summary,jdbcType=VARCHAR},
+      PICTURE = #{record.picture,jdbcType=VARCHAR},
+      PUBLISHER = #{record.publisher,jdbcType=VARCHAR},
+      PUBLISHDATE = #{record.publishdate,jdbcType=DATE},
+      STATUS = #{record.status,jdbcType=SMALLINT},
+      ORDERBY = #{record.orderby,jdbcType=SMALLINT},
+      VISITCOUNT = #{record.visitcount,jdbcType=INTEGER},
+      ISTOP = #{record.istop,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.pob.PobNews" >
+    update pob_news
+    <set >
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        SUMMARY = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        PICTURE = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        PUBLISHER = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="publishdate != null" >
+        PUBLISHDATE = #{publishdate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="orderby != null" >
+        ORDERBY = #{orderby,jdbcType=SMALLINT},
+      </if>
+      <if test="visitcount != null" >
+        VISITCOUNT = #{visitcount,jdbcType=INTEGER},
+      </if>
+      <if test="istop != null" >
+        ISTOP = #{istop,jdbcType=SMALLINT},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.holley.charging.model.pob.PobNews" >
+    update pob_news
+    set TYPE = #{type,jdbcType=SMALLINT},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SUMMARY = #{summary,jdbcType=VARCHAR},
+      PICTURE = #{picture,jdbcType=VARCHAR},
+      PUBLISHER = #{publisher,jdbcType=VARCHAR},
+      PUBLISHDATE = #{publishdate,jdbcType=DATE},
+      STATUS = #{status,jdbcType=SMALLINT},
+      ORDERBY = #{orderby,jdbcType=SMALLINT},
+      VISITCOUNT = #{visitcount,jdbcType=INTEGER},
+      ISTOP = #{istop,jdbcType=SMALLINT},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.pob.PobNews" >
+    update pob_news
+    set TYPE = #{type,jdbcType=SMALLINT},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SUMMARY = #{summary,jdbcType=VARCHAR},
+      PICTURE = #{picture,jdbcType=VARCHAR},
+      PUBLISHER = #{publisher,jdbcType=VARCHAR},
+      PUBLISHDATE = #{publishdate,jdbcType=DATE},
+      STATUS = #{status,jdbcType=SMALLINT},
+      ORDERBY = #{orderby,jdbcType=SMALLINT},
+      VISITCOUNT = #{visitcount,jdbcType=INTEGER},
+      ISTOP = #{istop,jdbcType=SMALLINT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

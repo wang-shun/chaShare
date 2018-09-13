@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:flex="http://www.springframework.org/schema/flex"
+	xsi:schemaLocation="       
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd       
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd       
+      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd       
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd       
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+      http://www.springframework.org/schema/flex
+      http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"
+	default-autowire="byName">
+	<!-- 字典service -->
+	<bean id="dictionaryService" class="com.holley.platform.serviceimpl.DictionaryServiceImpl"/>
+	<!-- 公共服务 -->
+	<bean id="commonService" class="com.holley.charging.service.shareImpl.CommonServiceImpl"/>
+	<!-- 本地缓存初始化 -->
+	<bean id="localCacheUtil" class="com.holley.charging.common.util.LocalCacheUtil" init-method="init"/>
+	<bean id="cacheSysHolder" class="com.holley.platform.util.CacheSysHolder" init-method="init" />
+	<!-- 任务初始化类 -->
+	<bean id="jobInitBase" class="com.holley.charging.common.util.JobInitBase" init-method="init"/>
+</beans>

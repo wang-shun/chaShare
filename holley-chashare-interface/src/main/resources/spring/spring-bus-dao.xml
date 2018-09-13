@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:flex="http://www.springframework.org/schema/flex"
+	xsi:schemaLocation="       
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd       
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd       
+      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd       
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd       
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+      http://www.springframework.org/schema/flex
+      http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"
+	default-autowire="byName">
+	
+	<!-- BUS -->
+	<bean id="busAccountLogMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusAccountLogMapper" />
+	</bean>
+	<bean id="busAccountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusAccountMapper" />
+	</bean>
+	<bean id="busAppointmentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusAppointmentMapper" />
+	</bean>
+	<bean id="busBussinessInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusBussinessInfoMapper" />
+	</bean>
+	<bean id="busCashMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusCashMapper" />
+	</bean>
+	<bean id="busChargeRuleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusChargeRuleMapper" />
+	</bean>
+	<bean id="busPileChargeruleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusPileChargeruleMapper" />
+	</bean>
+	<bean id="busFavoritesMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusFavoritesMapper" />
+	</bean>
+	<bean id="busPaymentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusPaymentMapper" />
+	</bean>
+	<bean id="busPileCommentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusPileCommentMapper" />
+	</bean>
+	<bean id="busPileModelMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusPileModelMapper" />
+	</bean>
+	<bean id="busRechargeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusRechargeMapper" />
+	</bean>
+	<bean id="busRepairPointMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusRepairPointMapper" />
+	</bean>
+	<bean id="busUserInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusUserInfoMapper" />
+	</bean>
+	<bean id="busUserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusUserMapper" />
+	</bean>
+	<bean id="busUserRealMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusUserRealMapper" />
+	</bean>
+	<bean id="busUserReceiptMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusUserReceiptMapper" />
+	</bean>	
+	<bean id="busBillsDetailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusBillsDetailMapper" />
+	</bean>	
+	<bean id="busBillsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusBillsMapper" />
+	</bean>
+	<bean id="busPileApplyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusPileApplyMapper" />
+	</bean>
+	<bean id="busSuggestionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusSuggestionMapper" />
+	</bean>	
+	<bean id="busUserTokenMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusUserTokenMapper" />
+	</bean>
+	<bean id="busGroupInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.bus.BusGroupInfoMapper" />
+	</bean>
+	
+	<!-- pob -->
+	<bean id="pobChargingPileMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.pob.PobChargingPileMapper" />
+	</bean>
+	<bean id="pobChargingStationMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.pob.PobChargingStationMapper" />
+	</bean>
+	<!-- dcs -->
+	<bean id="dcsChargerecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.holley.charging.dao.dcs.DcsChargerecordMapper" />
+	</bean>
+</beans>

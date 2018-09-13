@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.holley.charging.dao.dcs.DcsChargerecordMapper">
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.dcs.DcsChargerecord">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="CHARGEID" jdbcType="INTEGER" property="chargeid" />
+    <result column="CHARGE_TYPE" jdbcType="SMALLINT" property="chargeType" />
+    <result column="PILE_NUM" jdbcType="SMALLINT" property="pileNum" />
+    <result column="TRADE_NO" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="PAY_NO" jdbcType="VARCHAR" property="payNo" />
+    <result column="CARD_NO" jdbcType="VARCHAR" property="cardNo" />
+    <result column="IS_TIMES" jdbcType="SMALLINT" property="isTimes" />
+    <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="BMJ1" jdbcType="DOUBLE" property="bmj1" />
+    <result column="BMJ2" jdbcType="DOUBLE" property="bmj2" />
+    <result column="BMF1" jdbcType="DOUBLE" property="bmf1" />
+    <result column="BMF2" jdbcType="DOUBLE" property="bmf2" />
+    <result column="BMP1" jdbcType="DOUBLE" property="bmp1" />
+    <result column="BMP2" jdbcType="DOUBLE" property="bmp2" />
+    <result column="BMG1" jdbcType="DOUBLE" property="bmg1" />
+    <result column="BMG2" jdbcType="DOUBLE" property="bmg2" />
+    <result column="MET_TYPE" jdbcType="DOUBLE" property="metType" />
+    <result column="BMZ1" jdbcType="DOUBLE" property="bmz1" />
+    <result column="BMZ2" jdbcType="DOUBLE" property="bmz2" />
+    <result column="DJJ" jdbcType="DECIMAL" property="djj" />
+    <result column="DLJ" jdbcType="DOUBLE" property="dlj" />
+    <result column="JEJ" jdbcType="DECIMAL" property="jej" />
+    <result column="DJF" jdbcType="DECIMAL" property="djf" />
+    <result column="DLF" jdbcType="DOUBLE" property="dlf" />
+    <result column="JEF" jdbcType="DECIMAL" property="jef" />
+    <result column="DJP" jdbcType="DECIMAL" property="djp" />
+    <result column="DLP" jdbcType="DOUBLE" property="dlp" />
+    <result column="JEP" jdbcType="DECIMAL" property="jep" />
+    <result column="DJG" jdbcType="DECIMAL" property="djg" />
+    <result column="DLG" jdbcType="DOUBLE" property="dlg" />
+    <result column="JEG" jdbcType="DECIMAL" property="jeg" />
+    <result column="DLZ" jdbcType="DOUBLE" property="dlz" />
+    <result column="BUS_TYPE" jdbcType="SMALLINT" property="busType" />
+    <result column="AFTER_MONEY" jdbcType="DECIMAL" property="afterMoney" />
+    <result column="XFDJ" jdbcType="DECIMAL" property="xfdj" />
+    <result column="XFJE" jdbcType="DECIMAL" property="xfje" />
+    <result column="MARK" jdbcType="VARCHAR" property="mark" />
+    <result column="PAY_STATUS" jdbcType="SMALLINT" property="payStatus" />
+    <result column="CLIENT_NO" jdbcType="VARCHAR" property="clientNo" />
+    <result column="BEFORE_MONEY" jdbcType="DECIMAL" property="beforeMoney" />
+    <result column="BAG_NO" jdbcType="VARCHAR" property="bagNo" />
+    <result column="PAY_MONEY" jdbcType="DECIMAL" property="payMoney" />
+    <result column="DATE_TIME" jdbcType="VARCHAR" property="dateTime" />
+    <result column="RADOM_NO" jdbcType="VARCHAR" property="radomNo" />
+    <result column="PAY_TYPE" jdbcType="SMALLINT" property="payType" />
+    <result column="TAC" jdbcType="VARCHAR" property="tac" />
+    <result column="KEY_VERSION" jdbcType="VARCHAR" property="keyVersion" />
+    <result column="TERMINAL_NO" jdbcType="VARCHAR" property="terminalNo" />
+    <result column="CHA_PRICE" jdbcType="DECIMAL" property="chaPrice" />
+    <result column="CHA_MONEY" jdbcType="DECIMAL" property="chaMoney" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CHARGEID, CHARGE_TYPE, PILE_NUM, TRADE_NO, PAY_NO, CARD_NO, IS_TIMES, START_TIME, 
+    END_TIME, BMJ1, BMJ2, BMF1, BMF2, BMP1, BMP2, BMG1, BMG2, MET_TYPE, BMZ1, BMZ2, DJJ, 
+    DLJ, JEJ, DJF, DLF, JEF, DJP, DLP, JEP, DJG, DLG, JEG, DLZ, BUS_TYPE, AFTER_MONEY, 
+    XFDJ, XFJE, MARK, PAY_STATUS, CLIENT_NO, BEFORE_MONEY, BAG_NO, PAY_MONEY, DATE_TIME, 
+    RADOM_NO, PAY_TYPE, TAC, KEY_VERSION, TERMINAL_NO, CHA_PRICE, CHA_MONEY
+  </sql>
+  <select id="selectByExample" parameterType="com.holley.charging.model.dcs.DcsChargerecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dcs_chargerecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dcs_chargerecord
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dcs_chargerecord
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.dcs.DcsChargerecordExample">
+    delete from dcs_chargerecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.dcs.DcsChargerecord">
+    insert into dcs_chargerecord (ID, CHARGEID, CHARGE_TYPE, 
+      PILE_NUM, TRADE_NO, PAY_NO, 
+      CARD_NO, IS_TIMES, START_TIME, 
+      END_TIME, BMJ1, BMJ2, 
+      BMF1, BMF2, BMP1, BMP2, 
+      BMG1, BMG2, MET_TYPE, BMZ1, 
+      BMZ2, DJJ, DLJ, JEJ, 
+      DJF, DLF, JEF, DJP, 
+      DLP, JEP, DJG, DLG, 
+      JEG, DLZ, BUS_TYPE, 
+      AFTER_MONEY, XFDJ, XFJE, 
+      MARK, PAY_STATUS, CLIENT_NO, 
+      BEFORE_MONEY, BAG_NO, PAY_MONEY, 
+      DATE_TIME, RADOM_NO, PAY_TYPE, 
+      TAC, KEY_VERSION, TERMINAL_NO, 
+      CHA_PRICE, CHA_MONEY)
+    values (#{id,jdbcType=INTEGER}, #{chargeid,jdbcType=INTEGER}, #{chargeType,jdbcType=SMALLINT}, 
+      #{pileNum,jdbcType=SMALLINT}, #{tradeNo,jdbcType=VARCHAR}, #{payNo,jdbcType=VARCHAR}, 
+      #{cardNo,jdbcType=VARCHAR}, #{isTimes,jdbcType=SMALLINT}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{bmj1,jdbcType=DOUBLE}, #{bmj2,jdbcType=DOUBLE}, 
+      #{bmf1,jdbcType=DOUBLE}, #{bmf2,jdbcType=DOUBLE}, #{bmp1,jdbcType=DOUBLE}, #{bmp2,jdbcType=DOUBLE}, 
+      #{bmg1,jdbcType=DOUBLE}, #{bmg2,jdbcType=DOUBLE}, #{metType,jdbcType=DOUBLE}, #{bmz1,jdbcType=DOUBLE}, 
+      #{bmz2,jdbcType=DOUBLE}, #{djj,jdbcType=DECIMAL}, #{dlj,jdbcType=DOUBLE}, #{jej,jdbcType=DECIMAL}, 
+      #{djf,jdbcType=DECIMAL}, #{dlf,jdbcType=DOUBLE}, #{jef,jdbcType=DECIMAL}, #{djp,jdbcType=DECIMAL}, 
+      #{dlp,jdbcType=DOUBLE}, #{jep,jdbcType=DECIMAL}, #{djg,jdbcType=DECIMAL}, #{dlg,jdbcType=DOUBLE}, 
+      #{jeg,jdbcType=DECIMAL}, #{dlz,jdbcType=DOUBLE}, #{busType,jdbcType=SMALLINT}, 
+      #{afterMoney,jdbcType=DECIMAL}, #{xfdj,jdbcType=DECIMAL}, #{xfje,jdbcType=DECIMAL}, 
+      #{mark,jdbcType=VARCHAR}, #{payStatus,jdbcType=SMALLINT}, #{clientNo,jdbcType=VARCHAR}, 
+      #{beforeMoney,jdbcType=DECIMAL}, #{bagNo,jdbcType=VARCHAR}, #{payMoney,jdbcType=DECIMAL}, 
+      #{dateTime,jdbcType=VARCHAR}, #{radomNo,jdbcType=VARCHAR}, #{payType,jdbcType=SMALLINT}, 
+      #{tac,jdbcType=VARCHAR}, #{keyVersion,jdbcType=VARCHAR}, #{terminalNo,jdbcType=VARCHAR}, 
+      #{chaPrice,jdbcType=DECIMAL}, #{chaMoney,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.dcs.DcsChargerecord">
+    insert into dcs_chargerecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="chargeid != null">
+        CHARGEID,
+      </if>
+      <if test="chargeType != null">
+        CHARGE_TYPE,
+      </if>
+      <if test="pileNum != null">
+        PILE_NUM,
+      </if>
+      <if test="tradeNo != null">
+        TRADE_NO,
+      </if>
+      <if test="payNo != null">
+        PAY_NO,
+      </if>
+      <if test="cardNo != null">
+        CARD_NO,
+      </if>
+      <if test="isTimes != null">
+        IS_TIMES,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="bmj1 != null">
+        BMJ1,
+      </if>
+      <if test="bmj2 != null">
+        BMJ2,
+      </if>
+      <if test="bmf1 != null">
+        BMF1,
+      </if>
+      <if test="bmf2 != null">
+        BMF2,
+      </if>
+      <if test="bmp1 != null">
+        BMP1,
+      </if>
+      <if test="bmp2 != null">
+        BMP2,
+      </if>
+      <if test="bmg1 != null">
+        BMG1,
+      </if>
+      <if test="bmg2 != null">
+        BMG2,
+      </if>
+      <if test="metType != null">
+        MET_TYPE,
+      </if>
+      <if test="bmz1 != null">
+        BMZ1,
+      </if>
+      <if test="bmz2 != null">
+        BMZ2,
+      </if>
+      <if test="djj != null">
+        DJJ,
+      </if>
+      <if test="dlj != null">
+        DLJ,
+      </if>
+      <if test="jej != null">
+        JEJ,
+      </if>
+      <if test="djf != null">
+        DJF,
+      </if>
+      <if test="dlf != null">
+        DLF,
+      </if>
+      <if test="jef != null">
+        JEF,
+      </if>
+      <if test="djp != null">
+        DJP,
+      </if>
+      <if test="dlp != null">
+        DLP,
+      </if>
+      <if test="jep != null">
+        JEP,
+      </if>
+      <if test="djg != null">
+        DJG,
+      </if>
+      <if test="dlg != null">
+        DLG,
+      </if>
+      <if test="jeg != null">
+        JEG,
+      </if>
+      <if test="dlz != null">
+        DLZ,
+      </if>
+      <if test="busType != null">
+        BUS_TYPE,
+      </if>
+      <if test="afterMoney != null">
+        AFTER_MONEY,
+      </if>
+      <if test="xfdj != null">
+        XFDJ,
+      </if>
+      <if test="xfje != null">
+        XFJE,
+      </if>
+      <if test="mark != null">
+        MARK,
+      </if>
+      <if test="payStatus != null">
+        PAY_STATUS,
+      </if>
+      <if test="clientNo != null">
+        CLIENT_NO,
+      </if>
+      <if test="beforeMoney != null">
+        BEFORE_MONEY,
+      </if>
+      <if test="bagNo != null">
+        BAG_NO,
+      </if>
+      <if test="payMoney != null">
+        PAY_MONEY,
+      </if>
+      <if test="dateTime != null">
+        DATE_TIME,
+      </if>
+      <if test="radomNo != null">
+        RADOM_NO,
+      </if>
+      <if test="payType != null">
+        PAY_TYPE,
+      </if>
+      <if test="tac != null">
+        TAC,
+      </if>
+      <if test="keyVersion != null">
+        KEY_VERSION,
+      </if>
+      <if test="terminalNo != null">
+        TERMINAL_NO,
+      </if>
+      <if test="chaPrice != null">
+        CHA_PRICE,
+      </if>
+      <if test="chaMoney != null">
+        CHA_MONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="chargeid != null">
+        #{chargeid,jdbcType=INTEGER},
+      </if>
+      <if test="chargeType != null">
+        #{chargeType,jdbcType=SMALLINT},
+      </if>
+      <if test="pileNum != null">
+        #{pileNum,jdbcType=SMALLINT},
+      </if>
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payNo != null">
+        #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null">
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isTimes != null">
+        #{isTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bmj1 != null">
+        #{bmj1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmj2 != null">
+        #{bmj2,jdbcType=DOUBLE},
+      </if>
+      <if test="bmf1 != null">
+        #{bmf1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmf2 != null">
+        #{bmf2,jdbcType=DOUBLE},
+      </if>
+      <if test="bmp1 != null">
+        #{bmp1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmp2 != null">
+        #{bmp2,jdbcType=DOUBLE},
+      </if>
+      <if test="bmg1 != null">
+        #{bmg1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmg2 != null">
+        #{bmg2,jdbcType=DOUBLE},
+      </if>
+      <if test="metType != null">
+        #{metType,jdbcType=DOUBLE},
+      </if>
+      <if test="bmz1 != null">
+        #{bmz1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmz2 != null">
+        #{bmz2,jdbcType=DOUBLE},
+      </if>
+      <if test="djj != null">
+        #{djj,jdbcType=DECIMAL},
+      </if>
+      <if test="dlj != null">
+        #{dlj,jdbcType=DOUBLE},
+      </if>
+      <if test="jej != null">
+        #{jej,jdbcType=DECIMAL},
+      </if>
+      <if test="djf != null">
+        #{djf,jdbcType=DECIMAL},
+      </if>
+      <if test="dlf != null">
+        #{dlf,jdbcType=DOUBLE},
+      </if>
+      <if test="jef != null">
+        #{jef,jdbcType=DECIMAL},
+      </if>
+      <if test="djp != null">
+        #{djp,jdbcType=DECIMAL},
+      </if>
+      <if test="dlp != null">
+        #{dlp,jdbcType=DOUBLE},
+      </if>
+      <if test="jep != null">
+        #{jep,jdbcType=DECIMAL},
+      </if>
+      <if test="djg != null">
+        #{djg,jdbcType=DECIMAL},
+      </if>
+      <if test="dlg != null">
+        #{dlg,jdbcType=DOUBLE},
+      </if>
+      <if test="jeg != null">
+        #{jeg,jdbcType=DECIMAL},
+      </if>
+      <if test="dlz != null">
+        #{dlz,jdbcType=DOUBLE},
+      </if>
+      <if test="busType != null">
+        #{busType,jdbcType=SMALLINT},
+      </if>
+      <if test="afterMoney != null">
+        #{afterMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="xfdj != null">
+        #{xfdj,jdbcType=DECIMAL},
+      </if>
+      <if test="xfje != null">
+        #{xfje,jdbcType=DECIMAL},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="clientNo != null">
+        #{clientNo,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeMoney != null">
+        #{beforeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="bagNo != null">
+        #{bagNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney != null">
+        #{payMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="dateTime != null">
+        #{dateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="radomNo != null">
+        #{radomNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=SMALLINT},
+      </if>
+      <if test="tac != null">
+        #{tac,jdbcType=VARCHAR},
+      </if>
+      <if test="keyVersion != null">
+        #{keyVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNo != null">
+        #{terminalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="chaPrice != null">
+        #{chaPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chaMoney != null">
+        #{chaMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.dcs.DcsChargerecordExample" resultType="java.lang.Integer">
+    select count(*) from dcs_chargerecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dcs_chargerecord
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.chargeid != null">
+        CHARGEID = #{record.chargeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.chargeType != null">
+        CHARGE_TYPE = #{record.chargeType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.pileNum != null">
+        PILE_NUM = #{record.pileNum,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tradeNo != null">
+        TRADE_NO = #{record.tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payNo != null">
+        PAY_NO = #{record.payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNo != null">
+        CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isTimes != null">
+        IS_TIMES = #{record.isTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="record.startTime != null">
+        START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bmj1 != null">
+        BMJ1 = #{record.bmj1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bmj2 != null">
+        BMJ2 = #{record.bmj2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bmf1 != null">
+        BMF1 = #{record.bmf1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bmf2 != null">
+        BMF2 = #{record.bmf2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bmp1 != null">
+        BMP1 = #{record.bmp1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bmp2 != null">
+        BMP2 = #{record.bmp2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bmg1 != null">
+        BMG1 = #{record.bmg1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bmg2 != null">
+        BMG2 = #{record.bmg2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.metType != null">
+        MET_TYPE = #{record.metType,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bmz1 != null">
+        BMZ1 = #{record.bmz1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bmz2 != null">
+        BMZ2 = #{record.bmz2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.djj != null">
+        DJJ = #{record.djj,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dlj != null">
+        DLJ = #{record.dlj,jdbcType=DOUBLE},
+      </if>
+      <if test="record.jej != null">
+        JEJ = #{record.jej,jdbcType=DECIMAL},
+      </if>
+      <if test="record.djf != null">
+        DJF = #{record.djf,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dlf != null">
+        DLF = #{record.dlf,jdbcType=DOUBLE},
+      </if>
+      <if test="record.jef != null">
+        JEF = #{record.jef,jdbcType=DECIMAL},
+      </if>
+      <if test="record.djp != null">
+        DJP = #{record.djp,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dlp != null">
+        DLP = #{record.dlp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.jep != null">
+        JEP = #{record.jep,jdbcType=DECIMAL},
+      </if>
+      <if test="record.djg != null">
+        DJG = #{record.djg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dlg != null">
+        DLG = #{record.dlg,jdbcType=DOUBLE},
+      </if>
+      <if test="record.jeg != null">
+        JEG = #{record.jeg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dlz != null">
+        DLZ = #{record.dlz,jdbcType=DOUBLE},
+      </if>
+      <if test="record.busType != null">
+        BUS_TYPE = #{record.busType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.afterMoney != null">
+        AFTER_MONEY = #{record.afterMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.xfdj != null">
+        XFDJ = #{record.xfdj,jdbcType=DECIMAL},
+      </if>
+      <if test="record.xfje != null">
+        XFJE = #{record.xfje,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mark != null">
+        MARK = #{record.mark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payStatus != null">
+        PAY_STATUS = #{record.payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.clientNo != null">
+        CLIENT_NO = #{record.clientNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeMoney != null">
+        BEFORE_MONEY = #{record.beforeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bagNo != null">
+        BAG_NO = #{record.bagNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payMoney != null">
+        PAY_MONEY = #{record.payMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dateTime != null">
+        DATE_TIME = #{record.dateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radomNo != null">
+        RADOM_NO = #{record.radomNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null">
+        PAY_TYPE = #{record.payType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tac != null">
+        TAC = #{record.tac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyVersion != null">
+        KEY_VERSION = #{record.keyVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalNo != null">
+        TERMINAL_NO = #{record.terminalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chaPrice != null">
+        CHA_PRICE = #{record.chaPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chaMoney != null">
+        CHA_MONEY = #{record.chaMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dcs_chargerecord
+    set ID = #{record.id,jdbcType=INTEGER},
+      CHARGEID = #{record.chargeid,jdbcType=INTEGER},
+      CHARGE_TYPE = #{record.chargeType,jdbcType=SMALLINT},
+      PILE_NUM = #{record.pileNum,jdbcType=SMALLINT},
+      TRADE_NO = #{record.tradeNo,jdbcType=VARCHAR},
+      PAY_NO = #{record.payNo,jdbcType=VARCHAR},
+      CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      IS_TIMES = #{record.isTimes,jdbcType=SMALLINT},
+      START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      BMJ1 = #{record.bmj1,jdbcType=DOUBLE},
+      BMJ2 = #{record.bmj2,jdbcType=DOUBLE},
+      BMF1 = #{record.bmf1,jdbcType=DOUBLE},
+      BMF2 = #{record.bmf2,jdbcType=DOUBLE},
+      BMP1 = #{record.bmp1,jdbcType=DOUBLE},
+      BMP2 = #{record.bmp2,jdbcType=DOUBLE},
+      BMG1 = #{record.bmg1,jdbcType=DOUBLE},
+      BMG2 = #{record.bmg2,jdbcType=DOUBLE},
+      MET_TYPE = #{record.metType,jdbcType=DOUBLE},
+      BMZ1 = #{record.bmz1,jdbcType=DOUBLE},
+      BMZ2 = #{record.bmz2,jdbcType=DOUBLE},
+      DJJ = #{record.djj,jdbcType=DECIMAL},
+      DLJ = #{record.dlj,jdbcType=DOUBLE},
+      JEJ = #{record.jej,jdbcType=DECIMAL},
+      DJF = #{record.djf,jdbcType=DECIMAL},
+      DLF = #{record.dlf,jdbcType=DOUBLE},
+      JEF = #{record.jef,jdbcType=DECIMAL},
+      DJP = #{record.djp,jdbcType=DECIMAL},
+      DLP = #{record.dlp,jdbcType=DOUBLE},
+      JEP = #{record.jep,jdbcType=DECIMAL},
+      DJG = #{record.djg,jdbcType=DECIMAL},
+      DLG = #{record.dlg,jdbcType=DOUBLE},
+      JEG = #{record.jeg,jdbcType=DECIMAL},
+      DLZ = #{record.dlz,jdbcType=DOUBLE},
+      BUS_TYPE = #{record.busType,jdbcType=SMALLINT},
+      AFTER_MONEY = #{record.afterMoney,jdbcType=DECIMAL},
+      XFDJ = #{record.xfdj,jdbcType=DECIMAL},
+      XFJE = #{record.xfje,jdbcType=DECIMAL},
+      MARK = #{record.mark,jdbcType=VARCHAR},
+      PAY_STATUS = #{record.payStatus,jdbcType=SMALLINT},
+      CLIENT_NO = #{record.clientNo,jdbcType=VARCHAR},
+      BEFORE_MONEY = #{record.beforeMoney,jdbcType=DECIMAL},
+      BAG_NO = #{record.bagNo,jdbcType=VARCHAR},
+      PAY_MONEY = #{record.payMoney,jdbcType=DECIMAL},
+      DATE_TIME = #{record.dateTime,jdbcType=VARCHAR},
+      RADOM_NO = #{record.radomNo,jdbcType=VARCHAR},
+      PAY_TYPE = #{record.payType,jdbcType=SMALLINT},
+      TAC = #{record.tac,jdbcType=VARCHAR},
+      KEY_VERSION = #{record.keyVersion,jdbcType=VARCHAR},
+      TERMINAL_NO = #{record.terminalNo,jdbcType=VARCHAR},
+      CHA_PRICE = #{record.chaPrice,jdbcType=DECIMAL},
+      CHA_MONEY = #{record.chaMoney,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.dcs.DcsChargerecord">
+    update dcs_chargerecord
+    <set>
+      <if test="chargeid != null">
+        CHARGEID = #{chargeid,jdbcType=INTEGER},
+      </if>
+      <if test="chargeType != null">
+        CHARGE_TYPE = #{chargeType,jdbcType=SMALLINT},
+      </if>
+      <if test="pileNum != null">
+        PILE_NUM = #{pileNum,jdbcType=SMALLINT},
+      </if>
+      <if test="tradeNo != null">
+        TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payNo != null">
+        PAY_NO = #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null">
+        CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isTimes != null">
+        IS_TIMES = #{isTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bmj1 != null">
+        BMJ1 = #{bmj1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmj2 != null">
+        BMJ2 = #{bmj2,jdbcType=DOUBLE},
+      </if>
+      <if test="bmf1 != null">
+        BMF1 = #{bmf1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmf2 != null">
+        BMF2 = #{bmf2,jdbcType=DOUBLE},
+      </if>
+      <if test="bmp1 != null">
+        BMP1 = #{bmp1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmp2 != null">
+        BMP2 = #{bmp2,jdbcType=DOUBLE},
+      </if>
+      <if test="bmg1 != null">
+        BMG1 = #{bmg1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmg2 != null">
+        BMG2 = #{bmg2,jdbcType=DOUBLE},
+      </if>
+      <if test="metType != null">
+        MET_TYPE = #{metType,jdbcType=DOUBLE},
+      </if>
+      <if test="bmz1 != null">
+        BMZ1 = #{bmz1,jdbcType=DOUBLE},
+      </if>
+      <if test="bmz2 != null">
+        BMZ2 = #{bmz2,jdbcType=DOUBLE},
+      </if>
+      <if test="djj != null">
+        DJJ = #{djj,jdbcType=DECIMAL},
+      </if>
+      <if test="dlj != null">
+        DLJ = #{dlj,jdbcType=DOUBLE},
+      </if>
+      <if test="jej != null">
+        JEJ = #{jej,jdbcType=DECIMAL},
+      </if>
+      <if test="djf != null">
+        DJF = #{djf,jdbcType=DECIMAL},
+      </if>
+      <if test="dlf != null">
+        DLF = #{dlf,jdbcType=DOUBLE},
+      </if>
+      <if test="jef != null">
+        JEF = #{jef,jdbcType=DECIMAL},
+      </if>
+      <if test="djp != null">
+        DJP = #{djp,jdbcType=DECIMAL},
+      </if>
+      <if test="dlp != null">
+        DLP = #{dlp,jdbcType=DOUBLE},
+      </if>
+      <if test="jep != null">
+        JEP = #{jep,jdbcType=DECIMAL},
+      </if>
+      <if test="djg != null">
+        DJG = #{djg,jdbcType=DECIMAL},
+      </if>
+      <if test="dlg != null">
+        DLG = #{dlg,jdbcType=DOUBLE},
+      </if>
+      <if test="jeg != null">
+        JEG = #{jeg,jdbcType=DECIMAL},
+      </if>
+      <if test="dlz != null">
+        DLZ = #{dlz,jdbcType=DOUBLE},
+      </if>
+      <if test="busType != null">
+        BUS_TYPE = #{busType,jdbcType=SMALLINT},
+      </if>
+      <if test="afterMoney != null">
+        AFTER_MONEY = #{afterMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="xfdj != null">
+        XFDJ = #{xfdj,jdbcType=DECIMAL},
+      </if>
+      <if test="xfje != null">
+        XFJE = #{xfje,jdbcType=DECIMAL},
+      </if>
+      <if test="mark != null">
+        MARK = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        PAY_STATUS = #{payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="clientNo != null">
+        CLIENT_NO = #{clientNo,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeMoney != null">
+        BEFORE_MONEY = #{beforeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="bagNo != null">
+        BAG_NO = #{bagNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney != null">
+        PAY_MONEY = #{payMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="dateTime != null">
+        DATE_TIME = #{dateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="radomNo != null">
+        RADOM_NO = #{radomNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        PAY_TYPE = #{payType,jdbcType=SMALLINT},
+      </if>
+      <if test="tac != null">
+        TAC = #{tac,jdbcType=VARCHAR},
+      </if>
+      <if test="keyVersion != null">
+        KEY_VERSION = #{keyVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNo != null">
+        TERMINAL_NO = #{terminalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="chaPrice != null">
+        CHA_PRICE = #{chaPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chaMoney != null">
+        CHA_MONEY = #{chaMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.dcs.DcsChargerecord">
+    update dcs_chargerecord
+    set CHARGEID = #{chargeid,jdbcType=INTEGER},
+      CHARGE_TYPE = #{chargeType,jdbcType=SMALLINT},
+      PILE_NUM = #{pileNum,jdbcType=SMALLINT},
+      TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      PAY_NO = #{payNo,jdbcType=VARCHAR},
+      CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      IS_TIMES = #{isTimes,jdbcType=SMALLINT},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      BMJ1 = #{bmj1,jdbcType=DOUBLE},
+      BMJ2 = #{bmj2,jdbcType=DOUBLE},
+      BMF1 = #{bmf1,jdbcType=DOUBLE},
+      BMF2 = #{bmf2,jdbcType=DOUBLE},
+      BMP1 = #{bmp1,jdbcType=DOUBLE},
+      BMP2 = #{bmp2,jdbcType=DOUBLE},
+      BMG1 = #{bmg1,jdbcType=DOUBLE},
+      BMG2 = #{bmg2,jdbcType=DOUBLE},
+      MET_TYPE = #{metType,jdbcType=DOUBLE},
+      BMZ1 = #{bmz1,jdbcType=DOUBLE},
+      BMZ2 = #{bmz2,jdbcType=DOUBLE},
+      DJJ = #{djj,jdbcType=DECIMAL},
+      DLJ = #{dlj,jdbcType=DOUBLE},
+      JEJ = #{jej,jdbcType=DECIMAL},
+      DJF = #{djf,jdbcType=DECIMAL},
+      DLF = #{dlf,jdbcType=DOUBLE},
+      JEF = #{jef,jdbcType=DECIMAL},
+      DJP = #{djp,jdbcType=DECIMAL},
+      DLP = #{dlp,jdbcType=DOUBLE},
+      JEP = #{jep,jdbcType=DECIMAL},
+      DJG = #{djg,jdbcType=DECIMAL},
+      DLG = #{dlg,jdbcType=DOUBLE},
+      JEG = #{jeg,jdbcType=DECIMAL},
+      DLZ = #{dlz,jdbcType=DOUBLE},
+      BUS_TYPE = #{busType,jdbcType=SMALLINT},
+      AFTER_MONEY = #{afterMoney,jdbcType=DECIMAL},
+      XFDJ = #{xfdj,jdbcType=DECIMAL},
+      XFJE = #{xfje,jdbcType=DECIMAL},
+      MARK = #{mark,jdbcType=VARCHAR},
+      PAY_STATUS = #{payStatus,jdbcType=SMALLINT},
+      CLIENT_NO = #{clientNo,jdbcType=VARCHAR},
+      BEFORE_MONEY = #{beforeMoney,jdbcType=DECIMAL},
+      BAG_NO = #{bagNo,jdbcType=VARCHAR},
+      PAY_MONEY = #{payMoney,jdbcType=DECIMAL},
+      DATE_TIME = #{dateTime,jdbcType=VARCHAR},
+      RADOM_NO = #{radomNo,jdbcType=VARCHAR},
+      PAY_TYPE = #{payType,jdbcType=SMALLINT},
+      TAC = #{tac,jdbcType=VARCHAR},
+      KEY_VERSION = #{keyVersion,jdbcType=VARCHAR},
+      TERMINAL_NO = #{terminalNo,jdbcType=VARCHAR},
+      CHA_PRICE = #{chaPrice,jdbcType=DECIMAL},
+      CHA_MONEY = #{chaMoney,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

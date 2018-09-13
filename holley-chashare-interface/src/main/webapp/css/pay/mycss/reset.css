@@ -1,0 +1,219 @@
+@charset "UTF-8";
+@font-face {
+	font-family: 'iconfont';
+	src: url('fonts/iconfont.eot');
+	src: url('fonts/iconfont.eot?#iefix') format('embedded-opentype'), url('fonts/iconfont.woff') format('woff'), url('fonts/iconfont.ttf') format('truetype'), url('fonts/iconfont.svg#iconfont') format('svg');
+}
+
+.iconfont {
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
+/*
+ * 全局reset
+ *
+ */
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "PingFang SC", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-weight: normal;
+}
+
+a {
+	display: block;
+	text-decoration: none;
+}
+
+a:-webkit-any-link {
+	color: #999;
+}
+
+img,
+input,
+select,
+button {
+	vertical-align: middle;
+}
+
+button {
+	outline: none;
+	cursor: pointer;
+	-webkit-appearance: button;
+}
+
+a,
+img,
+button {
+	-webkit-tap-highlight-color: transparent;
+}
+
+input {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-user-select: text;
+	-webkit-appearance: none;
+	outline: none;
+	border: none;
+}
+
+body {
+	-webkit-user-select: none;
+	background: #f7f9f9;
+}
+
+ul,
+ol {
+	list-style-type: none
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+
+/*topbar*/
+
+
+/*
+ *font
+ */
+
+.topbar>ul li:first-child,
+.topbar>ul li:last-child {
+	font-size: 14px;
+}
+
+[data-dpr="2"] .topbar>ul li:first-child,
+[data-dpr="2"] .topbar>ul li:last-child {
+	font-size: 28px;
+}
+
+[data-dpr="3"] .topbar>ul li:first-child,
+[data-dpr="3"] .topbar>ul li:last-child {
+	font-size: 42px;
+}
+
+.topbar {
+	position: fixed;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	height: 2.1333rem;
+	width: 100%;
+	background-color: #70c8f8;
+}
+
+.content-wrapper {
+	position: absolute;
+	top: 2.4rem;
+	left: 0;
+	bottom: 0;
+	overflow-y: scroll;
+	width: 100%;
+	background: #fff;
+}
+
+.topbar>img {
+	position: absolute;
+	width: 1.28rem;
+	height: 1.28rem;
+	left: 0.42667rem;
+	top: 0.42667rem;
+}
+
+.topbar>ul {
+	position: absolute;
+	left: 2.13333rem;
+	top: 0.58667rem;
+}
+
+.topbar>ul li:first-child {
+	color: #fff;
+}
+
+.topbar>ul li:last-child {
+	color: #fff;
+}
+
+
+/*end topbar*/
+
+
+/*m-topbar*/
+
+
+/*font*/
+
+.m-topbar>div {
+	font-size: 17px;
+}
+
+[data-dpr="2"] .m-topbar>div {
+	font-size: 34px;
+}
+
+[data-dpr="3"] .m-topbar>div {
+	font-size: 51px;
+}
+
+
+/*end font*/
+
+.m-topbar {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	position: fixed;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	height: 1.1733rem;
+	width: 100%;
+	background-color: #fff;
+}
+
+.m-topbar>div {
+	width: 50%;
+	line-height: 1.1733rem;
+	color: #333;
+}
+
+.m-topbar>div:first-child {
+	text-align: left;
+	padding-left: 0.4rem;
+}
+
+.m-topbar>div:last-child {
+	text-align: right;
+	padding-right: 0.4rem;
+}
+
+.m-content-wrapper {
+	position: absolute;
+	top: 1.44rem;
+	left: 0;
+	bottom: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	width: 100%;
+	background: #fff;
+}
+
+
+/*end m-topbar*/

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">  
+<struts>
+	<!-- 共享信息 -->
+	<package name="share" namespace="/v1" extends="json-base">
+		<!-- 查询站点信息 -->
+		<action name="query_stations_info" class="shareAction" method="queryStationsInfo">
+			<result type="json">
+			 <param name="root">resultBean</param>  
+			</result>
+		</action>
+		<!-- 设备状态变化推送 -->
+		<action name="notification_stationStatus" class="shareAction" method="notificationStationStatus">
+			<result type="json">
+			 <param name="root">resultBean</param>  
+			</result>
+		</action>
+		<!-- 设备接口状态查询 -->
+		<action name="query_station_status" class="shareAction" method="queryStationStatus">
+			<result type="json">
+			 <param name="root">resultBean</param>  
+			</result>
+		</action>
+		<!-- 查询统计信息 -->
+		<action name="query_station_stats" class="shareAction" method="queryStationStats">
+			<result type="json">
+			 <param name="root">resultBean</param>  
+			</result>
+		</action>
+		<!-- 获取token -->
+		<action name="query_token" class="serviceAction" method="queryToken">
+			<result type="json">
+			 <param name="root">resultBean</param>  
+			</result>
+		</action>
+		<!-- 设备认证 -->
+		<action name="query_equip_auth" class="serviceAction" method="queryEquipAuth">
+			<result type="json">
+			 <param name="root">resultBean</param>  
+			</result>
+		</action>
+		<!-- 启动充电 -->
+		<action name="query_start_charge" class="serviceAction" method="queryStartCharge">
+			<result type="json">
+			 <param name="root">resultBean</param>  
+			</result>
+		</action>
+		<!-- 停止充电 -->
+		<action name="query_stop_charge" class="serviceAction" method="queryStopCharge">
+			<result type="json">
+			 <param name="root">resultBean</param>  
+			</result>
+		</action>
+	</package>	
+</struts>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.platform.dao.sys.SysButtondefMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.platform.model.sys.SysButtondef" >
+    <id column="BUTTONID" property="buttonid" jdbcType="INTEGER" />
+    <result column="BUTTONNAME" property="buttonname" jdbcType="VARCHAR" />
+    <result column="MODULEID" property="moduleid" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="ICON" property="icon" jdbcType="VARCHAR" />
+    <result column="NOTE" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BUTTONID, BUTTONNAME, MODULEID, URL, ICON, NOTE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.platform.model.sys.SysButtondefExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_buttondef
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_buttondef
+    where BUTTONID = #{buttonid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_buttondef
+    where BUTTONID = #{buttonid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.platform.model.sys.SysButtondefExample" >
+    delete from sys_buttondef
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.platform.model.sys.SysButtondef" >
+    insert into sys_buttondef (BUTTONID, BUTTONNAME, MODULEID, 
+      URL, ICON, NOTE)
+    values (#{buttonid,jdbcType=INTEGER}, #{buttonname,jdbcType=VARCHAR}, #{moduleid,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.platform.model.sys.SysButtondef" >
+    insert into sys_buttondef
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonid != null" >
+        BUTTONID,
+      </if>
+      <if test="buttonname != null" >
+        BUTTONNAME,
+      </if>
+      <if test="moduleid != null" >
+        MODULEID,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="icon != null" >
+        ICON,
+      </if>
+      <if test="note != null" >
+        NOTE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonid != null" >
+        #{buttonid,jdbcType=INTEGER},
+      </if>
+      <if test="buttonname != null" >
+        #{buttonname,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleid != null" >
+        #{moduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.platform.model.sys.SysButtondefExample" resultType="java.lang.Integer" >
+    select count(*) from sys_buttondef
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_buttondef
+    <set >
+      <if test="record.buttonid != null" >
+        BUTTONID = #{record.buttonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.buttonname != null" >
+        BUTTONNAME = #{record.buttonname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleid != null" >
+        MODULEID = #{record.moduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null" >
+        ICON = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        NOTE = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_buttondef
+    set BUTTONID = #{record.buttonid,jdbcType=INTEGER},
+      BUTTONNAME = #{record.buttonname,jdbcType=VARCHAR},
+      MODULEID = #{record.moduleid,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR},
+      ICON = #{record.icon,jdbcType=VARCHAR},
+      NOTE = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.platform.model.sys.SysButtondef" >
+    update sys_buttondef
+    <set >
+      <if test="buttonname != null" >
+        BUTTONNAME = #{buttonname,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleid != null" >
+        MODULEID = #{moduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        ICON = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        NOTE = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BUTTONID = #{buttonid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.platform.model.sys.SysButtondef" >
+    update sys_buttondef
+    set BUTTONNAME = #{buttonname,jdbcType=VARCHAR},
+      MODULEID = #{moduleid,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      ICON = #{icon,jdbcType=VARCHAR},
+      NOTE = #{note,jdbcType=VARCHAR}
+    where BUTTONID = #{buttonid,jdbcType=INTEGER}
+  </update>
+  <select id="selectButtondefByUserid" resultMap="BaseResultMap" parameterType="int">
+  	SELECT bd.BUTTONID,bd.BUTTONNAME,bd.ICON,bd.MODULEID,bd.NOTE,bd.URL 
+	FROM sys_accountrole ar,sys_rolemodule rm,sys_buttondef bd
+	WHERE ar.ROLEID = rm.ROLEID
+	AND rm.MODULEID = bd.MODULEID
+	AND ar.USERID = #{value}
+  </select>
+  <select id="selectButtondefBySystemid" resultMap="BaseResultMap" parameterType="short">
+  	SELECT bd.BUTTONID,bd.BUTTONNAME,bd.ICON,bd.MODULEID,bd.NOTE,bd.URL 
+	FROM sys_moduledef md,sys_buttondef bd
+	WHERE md.MODULEID = bd.MODULEID
+	AND md.SYSTEMID = #{value}
+  </select>
+</mapper>

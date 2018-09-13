@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.dcs.DcsHisycMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.dcs.DcsHisyc" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="CHARGEID" property="chargeid" jdbcType="INTEGER" />
+    <result column="DATATYPE" property="datatype" jdbcType="INTEGER" />
+    <result column="DATATIME" property="datatime" jdbcType="TIMESTAMP" />
+    <result column="VALUE" property="value" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CHARGEID, DATATYPE, DATATIME, VALUE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.dcs.DcsHisycExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dcs_hisyc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dcs_hisyc
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dcs_hisyc
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.dcs.DcsHisycExample" >
+    delete from dcs_hisyc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.dcs.DcsHisyc" >
+    insert into dcs_hisyc (ID, CHARGEID, DATATYPE, 
+      DATATIME, VALUE)
+    values (#{id,jdbcType=INTEGER}, #{chargeid,jdbcType=INTEGER}, #{datatype,jdbcType=INTEGER}, 
+      #{datatime,jdbcType=TIMESTAMP}, #{value,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.dcs.DcsHisyc" >
+    insert into dcs_hisyc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="chargeid != null" >
+        CHARGEID,
+      </if>
+      <if test="datatype != null" >
+        DATATYPE,
+      </if>
+      <if test="datatime != null" >
+        DATATIME,
+      </if>
+      <if test="value != null" >
+        VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="chargeid != null" >
+        #{chargeid,jdbcType=INTEGER},
+      </if>
+      <if test="datatype != null" >
+        #{datatype,jdbcType=INTEGER},
+      </if>
+      <if test="datatime != null" >
+        #{datatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.dcs.DcsHisycExample" resultType="java.lang.Integer" >
+    select count(*) from dcs_hisyc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dcs_hisyc
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.chargeid != null" >
+        CHARGEID = #{record.chargeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.datatype != null" >
+        DATATYPE = #{record.datatype,jdbcType=INTEGER},
+      </if>
+      <if test="record.datatime != null" >
+        DATATIME = #{record.datatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.value != null" >
+        VALUE = #{record.value,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dcs_hisyc
+    set ID = #{record.id,jdbcType=INTEGER},
+      CHARGEID = #{record.chargeid,jdbcType=INTEGER},
+      DATATYPE = #{record.datatype,jdbcType=INTEGER},
+      DATATIME = #{record.datatime,jdbcType=TIMESTAMP},
+      VALUE = #{record.value,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.dcs.DcsHisyc" >
+    update dcs_hisyc
+    <set >
+      <if test="chargeid != null" >
+        CHARGEID = #{chargeid,jdbcType=INTEGER},
+      </if>
+      <if test="datatype != null" >
+        DATATYPE = #{datatype,jdbcType=INTEGER},
+      </if>
+      <if test="datatime != null" >
+        DATATIME = #{datatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value != null" >
+        VALUE = #{value,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.dcs.DcsHisyc" >
+    update dcs_hisyc
+    set CHARGEID = #{chargeid,jdbcType=INTEGER},
+      DATATYPE = #{datatype,jdbcType=INTEGER},
+      DATATIME = #{datatime,jdbcType=TIMESTAMP},
+      VALUE = #{value,jdbcType=DOUBLE}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

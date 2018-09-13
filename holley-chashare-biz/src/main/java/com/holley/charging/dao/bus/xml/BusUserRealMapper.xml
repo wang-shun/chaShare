@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.bus.BusUserRealMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.bus.BusUserReal" >
+    <id column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <id column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="CARD_NUM" property="cardNum" jdbcType="VARCHAR" />
+    <result column="FRONT" property="front" jdbcType="VARCHAR" />
+    <result column="CON" property="con" jdbcType="VARCHAR" />
+    <result column="REAL_NAME" property="realName" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="SMALLINT" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, ADD_TIME, CARD_NUM, FRONT, CON, REAL_NAME, STATUS, REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusUserRealExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_user_real
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusUserRealKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_user_real
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.holley.charging.model.bus.BusUserRealKey" >
+    delete from bus_user_real
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.bus.BusUserRealExample" >
+    delete from bus_user_real
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.bus.BusUserReal" >
+    insert into bus_user_real (USER_ID, ADD_TIME, CARD_NUM, 
+      FRONT, CON, REAL_NAME, 
+      STATUS, REMARK)
+    values (#{userId,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, #{cardNum,jdbcType=VARCHAR}, 
+      #{front,jdbcType=VARCHAR}, #{con,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.bus.BusUserReal" >
+    insert into bus_user_real
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="cardNum != null" >
+        CARD_NUM,
+      </if>
+      <if test="front != null" >
+        FRONT,
+      </if>
+      <if test="con != null" >
+        CON,
+      </if>
+      <if test="realName != null" >
+        REAL_NAME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardNum != null" >
+        #{cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="front != null" >
+        #{front,jdbcType=VARCHAR},
+      </if>
+      <if test="con != null" >
+        #{con,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.bus.BusUserRealExample" resultType="java.lang.Integer" >
+    select count(*) from bus_user_real
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_user_real
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cardNum != null" >
+        CARD_NUM = #{record.cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.front != null" >
+        FRONT = #{record.front,jdbcType=VARCHAR},
+      </if>
+      <if test="record.con != null" >
+        CON = #{record.con,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null" >
+        REAL_NAME = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_user_real
+    set USER_ID = #{record.userId,jdbcType=INTEGER},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      CARD_NUM = #{record.cardNum,jdbcType=VARCHAR},
+      FRONT = #{record.front,jdbcType=VARCHAR},
+      CON = #{record.con,jdbcType=VARCHAR},
+      REAL_NAME = #{record.realName,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=SMALLINT},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.bus.BusUserReal" >
+    update bus_user_real
+    <set >
+      <if test="cardNum != null" >
+        CARD_NUM = #{cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="front != null" >
+        FRONT = #{front,jdbcType=VARCHAR},
+      </if>
+      <if test="con != null" >
+        CON = #{con,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        REAL_NAME = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.bus.BusUserReal" >
+    update bus_user_real
+    set CARD_NUM = #{cardNum,jdbcType=VARCHAR},
+      FRONT = #{front,jdbcType=VARCHAR},
+      CON = #{con,jdbcType=VARCHAR},
+      REAL_NAME = #{realName,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=SMALLINT},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+  </update>
+  
+</mapper>

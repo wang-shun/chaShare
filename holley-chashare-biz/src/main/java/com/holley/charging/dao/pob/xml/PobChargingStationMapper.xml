@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.pob.PobChargingStationMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.pob.PobChargingStation" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="STATION_NAME" property="stationName" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="INTEGER" />
+    <result column="CITY" property="city" jdbcType="INTEGER" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="LNG" property="lng" jdbcType="VARCHAR" />
+    <result column="LAT" property="lat" jdbcType="VARCHAR" />
+    <result column="BUS_MEC" property="busMec" jdbcType="INTEGER" />
+    <result column="BUS_TYPE" property="busType" jdbcType="SMALLINT" />
+    <result column="OPEN_DAY" property="openDay" jdbcType="SMALLINT" />
+    <result column="OPEN_TIME" property="openTime" jdbcType="SMALLINT" />
+    <result column="PARK_TYPE" property="parkType" jdbcType="SMALLINT" />
+    <result column="IS_PARK_FEE" property="isParkFee" jdbcType="SMALLINT" />
+    <result column="IS_SHOW" property="isShow" jdbcType="SMALLINT" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="IMG" property="img" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="SCORE" property="score" jdbcType="SMALLINT" />
+    <result column="IS_VALIDATE" property="isValidate" jdbcType="SMALLINT" />
+    <result column="OPERAT_TIME" property="operatTime" jdbcType="TIMESTAMP" />
+    <result column="LINK_MAN" property="linkMan" jdbcType="VARCHAR" />
+    <result column="LINK_PHONE" property="linkPhone" jdbcType="VARCHAR" />
+    <result column="FAST_NUM" property="fastNum" jdbcType="INTEGER" />
+    <result column="SLOW_NUM" property="slowNum" jdbcType="INTEGER" />
+    <result column="DATA_SOURCE" property="dataSource" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, STATION_NAME, PROVINCE, CITY, ADDRESS, LNG, LAT, BUS_MEC, BUS_TYPE, OPEN_DAY, 
+    OPEN_TIME, PARK_TYPE, IS_PARK_FEE, IS_SHOW, REMARK, IMG, UPDATE_TIME, SCORE, IS_VALIDATE, 
+    OPERAT_TIME, LINK_MAN, LINK_PHONE, FAST_NUM, SLOW_NUM, DATA_SOURCE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.pob.PobChargingStationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pob_charging_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pob_charging_station
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pob_charging_station
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.pob.PobChargingStationExample" >
+    delete from pob_charging_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.pob.PobChargingStation" useGeneratedKeys="true" keyProperty="id">
+    insert into pob_charging_station (ID, STATION_NAME, PROVINCE, 
+      CITY, ADDRESS, LNG, 
+      LAT, BUS_MEC, BUS_TYPE, 
+      OPEN_DAY, OPEN_TIME, PARK_TYPE, 
+      IS_PARK_FEE, IS_SHOW, REMARK, 
+      IMG, UPDATE_TIME, SCORE, 
+      IS_VALIDATE, OPERAT_TIME, LINK_MAN, 
+      LINK_PHONE, FAST_NUM, SLOW_NUM, 
+      DATA_SOURCE)
+    values (#{id,jdbcType=INTEGER}, #{stationName,jdbcType=VARCHAR}, #{province,jdbcType=INTEGER}, 
+      #{city,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, 
+      #{lat,jdbcType=VARCHAR}, #{busMec,jdbcType=INTEGER}, #{busType,jdbcType=SMALLINT}, 
+      #{openDay,jdbcType=SMALLINT}, #{openTime,jdbcType=SMALLINT}, #{parkType,jdbcType=SMALLINT}, 
+      #{isParkFee,jdbcType=SMALLINT}, #{isShow,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{score,jdbcType=SMALLINT}, 
+      #{isValidate,jdbcType=SMALLINT}, #{operatTime,jdbcType=TIMESTAMP}, #{linkMan,jdbcType=VARCHAR}, 
+      #{linkPhone,jdbcType=VARCHAR}, #{fastNum,jdbcType=INTEGER}, #{slowNum,jdbcType=INTEGER}, 
+      #{dataSource,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.pob.PobChargingStation" useGeneratedKeys="true" keyProperty="id">
+    insert into pob_charging_station
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="stationName != null" >
+        STATION_NAME,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="lng != null" >
+        LNG,
+      </if>
+      <if test="lat != null" >
+        LAT,
+      </if>
+      <if test="busMec != null" >
+        BUS_MEC,
+      </if>
+      <if test="busType != null" >
+        BUS_TYPE,
+      </if>
+      <if test="openDay != null" >
+        OPEN_DAY,
+      </if>
+      <if test="openTime != null" >
+        OPEN_TIME,
+      </if>
+      <if test="parkType != null" >
+        PARK_TYPE,
+      </if>
+      <if test="isParkFee != null" >
+        IS_PARK_FEE,
+      </if>
+      <if test="isShow != null" >
+        IS_SHOW,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="img != null" >
+        IMG,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="score != null" >
+        SCORE,
+      </if>
+      <if test="isValidate != null" >
+        IS_VALIDATE,
+      </if>
+      <if test="operatTime != null" >
+        OPERAT_TIME,
+      </if>
+      <if test="linkMan != null" >
+        LINK_MAN,
+      </if>
+      <if test="linkPhone != null" >
+        LINK_PHONE,
+      </if>
+      <if test="fastNum != null" >
+        FAST_NUM,
+      </if>
+      <if test="slowNum != null" >
+        SLOW_NUM,
+      </if>
+      <if test="dataSource != null" >
+        DATA_SOURCE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stationName != null" >
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="busMec != null" >
+        #{busMec,jdbcType=INTEGER},
+      </if>
+      <if test="busType != null" >
+        #{busType,jdbcType=SMALLINT},
+      </if>
+      <if test="openDay != null" >
+        #{openDay,jdbcType=SMALLINT},
+      </if>
+      <if test="openTime != null" >
+        #{openTime,jdbcType=SMALLINT},
+      </if>
+      <if test="parkType != null" >
+        #{parkType,jdbcType=SMALLINT},
+      </if>
+      <if test="isParkFee != null" >
+        #{isParkFee,jdbcType=SMALLINT},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=SMALLINT},
+      </if>
+      <if test="isValidate != null" >
+        #{isValidate,jdbcType=SMALLINT},
+      </if>
+      <if test="operatTime != null" >
+        #{operatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkMan != null" >
+        #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="fastNum != null" >
+        #{fastNum,jdbcType=INTEGER},
+      </if>
+      <if test="slowNum != null" >
+        #{slowNum,jdbcType=INTEGER},
+      </if>
+      <if test="dataSource != null" >
+        #{dataSource,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.pob.PobChargingStationExample" resultType="java.lang.Integer" >
+    select count(*) from pob_charging_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pob_charging_station
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationName != null" >
+        STATION_NAME = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        PROVINCE = #{record.province,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null" >
+        CITY = #{record.city,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lng != null" >
+        LNG = #{record.lng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lat != null" >
+        LAT = #{record.lat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busMec != null" >
+        BUS_MEC = #{record.busMec,jdbcType=INTEGER},
+      </if>
+      <if test="record.busType != null" >
+        BUS_TYPE = #{record.busType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.openDay != null" >
+        OPEN_DAY = #{record.openDay,jdbcType=SMALLINT},
+      </if>
+      <if test="record.openTime != null" >
+        OPEN_TIME = #{record.openTime,jdbcType=SMALLINT},
+      </if>
+      <if test="record.parkType != null" >
+        PARK_TYPE = #{record.parkType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isParkFee != null" >
+        IS_PARK_FEE = #{record.isParkFee,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isShow != null" >
+        IS_SHOW = #{record.isShow,jdbcType=SMALLINT},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null" >
+        IMG = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.score != null" >
+        SCORE = #{record.score,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isValidate != null" >
+        IS_VALIDATE = #{record.isValidate,jdbcType=SMALLINT},
+      </if>
+      <if test="record.operatTime != null" >
+        OPERAT_TIME = #{record.operatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.linkMan != null" >
+        LINK_MAN = #{record.linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkPhone != null" >
+        LINK_PHONE = #{record.linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fastNum != null" >
+        FAST_NUM = #{record.fastNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.slowNum != null" >
+        SLOW_NUM = #{record.slowNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.dataSource != null" >
+        DATA_SOURCE = #{record.dataSource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pob_charging_station
+    set ID = #{record.id,jdbcType=INTEGER},
+      STATION_NAME = #{record.stationName,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=INTEGER},
+      CITY = #{record.city,jdbcType=INTEGER},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      LNG = #{record.lng,jdbcType=VARCHAR},
+      LAT = #{record.lat,jdbcType=VARCHAR},
+      BUS_MEC = #{record.busMec,jdbcType=INTEGER},
+      BUS_TYPE = #{record.busType,jdbcType=SMALLINT},
+      OPEN_DAY = #{record.openDay,jdbcType=SMALLINT},
+      OPEN_TIME = #{record.openTime,jdbcType=SMALLINT},
+      PARK_TYPE = #{record.parkType,jdbcType=SMALLINT},
+      IS_PARK_FEE = #{record.isParkFee,jdbcType=SMALLINT},
+      IS_SHOW = #{record.isShow,jdbcType=SMALLINT},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      IMG = #{record.img,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      SCORE = #{record.score,jdbcType=SMALLINT},
+      IS_VALIDATE = #{record.isValidate,jdbcType=SMALLINT},
+      OPERAT_TIME = #{record.operatTime,jdbcType=TIMESTAMP},
+      LINK_MAN = #{record.linkMan,jdbcType=VARCHAR},
+      LINK_PHONE = #{record.linkPhone,jdbcType=VARCHAR},
+      FAST_NUM = #{record.fastNum,jdbcType=INTEGER},
+      SLOW_NUM = #{record.slowNum,jdbcType=INTEGER},
+      DATA_SOURCE = #{record.dataSource,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.pob.PobChargingStation" >
+    update pob_charging_station
+    <set >
+      <if test="stationName != null" >
+        STATION_NAME = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        LNG = #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        LAT = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="busMec != null" >
+        BUS_MEC = #{busMec,jdbcType=INTEGER},
+      </if>
+      <if test="busType != null" >
+        BUS_TYPE = #{busType,jdbcType=SMALLINT},
+      </if>
+      <if test="openDay != null" >
+        OPEN_DAY = #{openDay,jdbcType=SMALLINT},
+      </if>
+      <if test="openTime != null" >
+        OPEN_TIME = #{openTime,jdbcType=SMALLINT},
+      </if>
+      <if test="parkType != null" >
+        PARK_TYPE = #{parkType,jdbcType=SMALLINT},
+      </if>
+      <if test="isParkFee != null" >
+        IS_PARK_FEE = #{isParkFee,jdbcType=SMALLINT},
+      </if>
+      <if test="isShow != null" >
+        IS_SHOW = #{isShow,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        IMG = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        SCORE = #{score,jdbcType=SMALLINT},
+      </if>
+      <if test="isValidate != null" >
+        IS_VALIDATE = #{isValidate,jdbcType=SMALLINT},
+      </if>
+      <if test="operatTime != null" >
+        OPERAT_TIME = #{operatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkMan != null" >
+        LINK_MAN = #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        LINK_PHONE = #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="fastNum != null" >
+        FAST_NUM = #{fastNum,jdbcType=INTEGER},
+      </if>
+      <if test="slowNum != null" >
+        SLOW_NUM = #{slowNum,jdbcType=INTEGER},
+      </if>
+      <if test="dataSource != null" >
+        DATA_SOURCE = #{dataSource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.pob.PobChargingStation" >
+    update pob_charging_station
+    set STATION_NAME = #{stationName,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=INTEGER},
+      CITY = #{city,jdbcType=INTEGER},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      LNG = #{lng,jdbcType=VARCHAR},
+      LAT = #{lat,jdbcType=VARCHAR},
+      BUS_MEC = #{busMec,jdbcType=INTEGER},
+      BUS_TYPE = #{busType,jdbcType=SMALLINT},
+      OPEN_DAY = #{openDay,jdbcType=SMALLINT},
+      OPEN_TIME = #{openTime,jdbcType=SMALLINT},
+      PARK_TYPE = #{parkType,jdbcType=SMALLINT},
+      IS_PARK_FEE = #{isParkFee,jdbcType=SMALLINT},
+      IS_SHOW = #{isShow,jdbcType=SMALLINT},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      IMG = #{img,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      SCORE = #{score,jdbcType=SMALLINT},
+      IS_VALIDATE = #{isValidate,jdbcType=SMALLINT},
+      OPERAT_TIME = #{operatTime,jdbcType=TIMESTAMP},
+      LINK_MAN = #{linkMan,jdbcType=VARCHAR},
+      LINK_PHONE = #{linkPhone,jdbcType=VARCHAR},
+      FAST_NUM = #{fastNum,jdbcType=INTEGER},
+      SLOW_NUM = #{slowNum,jdbcType=INTEGER},
+      DATA_SOURCE = #{dataSource,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- ADD -->
+  <select id="queryStationInfoByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	  SELECT
+  	  <include refid="Base_Column_List" />
+      FROM pob_charging_station 
+      WHERE 1=1
+      <if test="lastQueryTime != null">
+       AND UPDATE_TIME  &gt;= #{lastQueryTime}
+      </if>
+  </select>
+</mapper>

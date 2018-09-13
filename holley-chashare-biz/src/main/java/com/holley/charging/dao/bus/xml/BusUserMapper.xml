@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.bus.BusUserMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.bus.BusUser" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="PAY_PASSWORD" property="payPassword" jdbcType="VARCHAR" />
+    <result column="HEAD_IMG" property="headImg" jdbcType="VARCHAR" />
+    <result column="IS_LOCK" property="isLock" jdbcType="SMALLINT" />
+    <result column="REAL_STATUS" property="realStatus" jdbcType="SMALLINT" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="EMAIL_STATUS" property="emailStatus" jdbcType="SMALLINT" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="PHONE_STATUS" property="phoneStatus" jdbcType="SMALLINT" />
+    <result column="USER_TYPE" property="userType" jdbcType="SMALLINT" />
+    <result column="INFO_ID" property="infoId" jdbcType="INTEGER" />
+    <result column="GROUP_ID" property="groupId" jdbcType="INTEGER" />
+    <result column="REGIST_TIME" property="registTime" jdbcType="TIMESTAMP" />
+    <result column="REGIST_IP" property="registIp" jdbcType="VARCHAR" />
+    <result column="usableMoney" property="usableMoney" jdbcType="DECIMAL" />
+    <result column="realName" property="realName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, USERNAME, PASSWORD, PAY_PASSWORD, HEAD_IMG, IS_LOCK, REAL_STATUS, EMAIL, EMAIL_STATUS, 
+    PHONE, PHONE_STATUS, USER_TYPE, INFO_ID, GROUP_ID, REGIST_TIME, REGIST_IP
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_user
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus_user
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.bus.BusUserExample" >
+    delete from bus_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.bus.BusUser" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_user (ID, USERNAME, PASSWORD, 
+      PAY_PASSWORD, HEAD_IMG, IS_LOCK, 
+      REAL_STATUS, EMAIL, EMAIL_STATUS, 
+      PHONE, PHONE_STATUS, USER_TYPE, 
+      INFO_ID, GROUP_ID, REGIST_TIME, 
+      REGIST_IP)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{payPassword,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{isLock,jdbcType=SMALLINT}, 
+      #{realStatus,jdbcType=SMALLINT}, #{email,jdbcType=VARCHAR}, #{emailStatus,jdbcType=SMALLINT}, 
+      #{phone,jdbcType=VARCHAR}, #{phoneStatus,jdbcType=SMALLINT}, #{userType,jdbcType=SMALLINT}, 
+      #{infoId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, #{registTime,jdbcType=TIMESTAMP}, 
+      #{registIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.bus.BusUser" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="payPassword != null" >
+        PAY_PASSWORD,
+      </if>
+      <if test="headImg != null" >
+        HEAD_IMG,
+      </if>
+      <if test="isLock != null" >
+        IS_LOCK,
+      </if>
+      <if test="realStatus != null" >
+        REAL_STATUS,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="emailStatus != null" >
+        EMAIL_STATUS,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="phoneStatus != null" >
+        PHONE_STATUS,
+      </if>
+      <if test="userType != null" >
+        USER_TYPE,
+      </if>
+      <if test="infoId != null" >
+        INFO_ID,
+      </if>
+      <if test="groupId != null" >
+        GROUP_ID,
+      </if>
+      <if test="registTime != null" >
+        REGIST_TIME,
+      </if>
+      <if test="registIp != null" >
+        REGIST_IP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="payPassword != null" >
+        #{payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        #{isLock,jdbcType=SMALLINT},
+      </if>
+      <if test="realStatus != null" >
+        #{realStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailStatus != null" >
+        #{emailStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneStatus != null" >
+        #{phoneStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=SMALLINT},
+      </if>
+      <if test="infoId != null" >
+        #{infoId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="registTime != null" >
+        #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registIp != null" >
+        #{registIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.bus.BusUserExample" resultType="java.lang.Integer" >
+    select count(*) from bus_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_user
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPassword != null" >
+        PAY_PASSWORD = #{record.payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headImg != null" >
+        HEAD_IMG = #{record.headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLock != null" >
+        IS_LOCK = #{record.isLock,jdbcType=SMALLINT},
+      </if>
+      <if test="record.realStatus != null" >
+        REAL_STATUS = #{record.realStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailStatus != null" >
+        EMAIL_STATUS = #{record.emailStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneStatus != null" >
+        PHONE_STATUS = #{record.phoneStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.userType != null" >
+        USER_TYPE = #{record.userType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.infoId != null" >
+        INFO_ID = #{record.infoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupId != null" >
+        GROUP_ID = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.registTime != null" >
+        REGIST_TIME = #{record.registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.registIp != null" >
+        REGIST_IP = #{record.registIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_user
+    set ID = #{record.id,jdbcType=INTEGER},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      PAY_PASSWORD = #{record.payPassword,jdbcType=VARCHAR},
+      HEAD_IMG = #{record.headImg,jdbcType=VARCHAR},
+      IS_LOCK = #{record.isLock,jdbcType=SMALLINT},
+      REAL_STATUS = #{record.realStatus,jdbcType=SMALLINT},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      EMAIL_STATUS = #{record.emailStatus,jdbcType=SMALLINT},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      PHONE_STATUS = #{record.phoneStatus,jdbcType=SMALLINT},
+      USER_TYPE = #{record.userType,jdbcType=SMALLINT},
+      INFO_ID = #{record.infoId,jdbcType=INTEGER},
+      GROUP_ID = #{record.groupId,jdbcType=INTEGER},
+      REGIST_TIME = #{record.registTime,jdbcType=TIMESTAMP},
+      REGIST_IP = #{record.registIp,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.bus.BusUser" >
+    update bus_user
+    <set >
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="payPassword != null" >
+        PAY_PASSWORD = #{payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        HEAD_IMG = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        IS_LOCK = #{isLock,jdbcType=SMALLINT},
+      </if>
+      <if test="realStatus != null" >
+        REAL_STATUS = #{realStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailStatus != null" >
+        EMAIL_STATUS = #{emailStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneStatus != null" >
+        PHONE_STATUS = #{phoneStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="userType != null" >
+        USER_TYPE = #{userType,jdbcType=SMALLINT},
+      </if>
+      <if test="infoId != null" >
+        INFO_ID = #{infoId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        GROUP_ID = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="registTime != null" >
+        REGIST_TIME = #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registIp != null" >
+        REGIST_IP = #{registIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.bus.BusUser" >
+    update bus_user
+    set USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      PAY_PASSWORD = #{payPassword,jdbcType=VARCHAR},
+      HEAD_IMG = #{headImg,jdbcType=VARCHAR},
+      IS_LOCK = #{isLock,jdbcType=SMALLINT},
+      REAL_STATUS = #{realStatus,jdbcType=SMALLINT},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      EMAIL_STATUS = #{emailStatus,jdbcType=SMALLINT},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      PHONE_STATUS = #{phoneStatus,jdbcType=SMALLINT},
+      USER_TYPE = #{userType,jdbcType=SMALLINT},
+      INFO_ID = #{infoId,jdbcType=INTEGER},
+      GROUP_ID = #{groupId,jdbcType=INTEGER},
+      REGIST_TIME = #{registTime,jdbcType=TIMESTAMP},
+      REGIST_IP = #{registIp,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

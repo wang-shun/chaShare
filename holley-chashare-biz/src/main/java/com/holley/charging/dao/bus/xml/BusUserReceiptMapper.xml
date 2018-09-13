@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.bus.BusUserReceiptMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.bus.BusUserReceipt" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="RECIPIENT" property="recipient" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="EXPRESS_NUM" property="expressNum" jdbcType="VARCHAR" />
+    <result column="EXPRESS_COMPANY" property="expressCompany" jdbcType="VARCHAR" />
+    <result column="BILL_TYPE" property="billType" jdbcType="SMALLINT" />
+    <result column="BILL_HEAD" property="billHead" jdbcType="VARCHAR" />
+    <result column="MONEY" property="money" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="SMALLINT" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="TIME" property="time" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="VALID_REMARK" property="validRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, RECIPIENT, PHONE, EXPRESS_NUM, EXPRESS_COMPANY, BILL_TYPE, BILL_HEAD, 
+    MONEY, STATUS, ADDRESS, TIME, ADD_TIME, VALID_REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusUserReceiptExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_user_receipt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_user_receipt
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus_user_receipt
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.bus.BusUserReceiptExample" >
+    delete from bus_user_receipt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.bus.BusUserReceipt" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_user_receipt (ID, USER_ID, RECIPIENT, 
+      PHONE, EXPRESS_NUM, EXPRESS_COMPANY, 
+      BILL_TYPE, BILL_HEAD, MONEY, 
+      STATUS, ADDRESS, TIME, 
+      ADD_TIME, VALID_REMARK)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{recipient,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{expressNum,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, 
+      #{billType,jdbcType=SMALLINT}, #{billHead,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
+      #{status,jdbcType=SMALLINT}, #{address,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{validRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.bus.BusUserReceipt"  useGeneratedKeys="true" keyProperty="id">
+    insert into bus_user_receipt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="recipient != null" >
+        RECIPIENT,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="expressNum != null" >
+        EXPRESS_NUM,
+      </if>
+      <if test="expressCompany != null" >
+        EXPRESS_COMPANY,
+      </if>
+      <if test="billType != null" >
+        BILL_TYPE,
+      </if>
+      <if test="billHead != null" >
+        BILL_HEAD,
+      </if>
+      <if test="money != null" >
+        MONEY,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="time != null" >
+        TIME,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="validRemark != null" >
+        VALID_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="recipient != null" >
+        #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNum != null" >
+        #{expressNum,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCompany != null" >
+        #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null" >
+        #{billType,jdbcType=SMALLINT},
+      </if>
+      <if test="billHead != null" >
+        #{billHead,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validRemark != null" >
+        #{validRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.bus.BusUserReceiptExample" resultType="java.lang.Integer" >
+    select count(*) from bus_user_receipt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_user_receipt
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.recipient != null" >
+        RECIPIENT = #{record.recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressNum != null" >
+        EXPRESS_NUM = #{record.expressNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressCompany != null" >
+        EXPRESS_COMPANY = #{record.expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billType != null" >
+        BILL_TYPE = #{record.billType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.billHead != null" >
+        BILL_HEAD = #{record.billHead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null" >
+        MONEY = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        TIME = #{record.time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.validRemark != null" >
+        VALID_REMARK = #{record.validRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_user_receipt
+    set ID = #{record.id,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      RECIPIENT = #{record.recipient,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      EXPRESS_NUM = #{record.expressNum,jdbcType=VARCHAR},
+      EXPRESS_COMPANY = #{record.expressCompany,jdbcType=VARCHAR},
+      BILL_TYPE = #{record.billType,jdbcType=SMALLINT},
+      BILL_HEAD = #{record.billHead,jdbcType=VARCHAR},
+      MONEY = #{record.money,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=SMALLINT},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      TIME = #{record.time,jdbcType=VARCHAR},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      VALID_REMARK = #{record.validRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.bus.BusUserReceipt" >
+    update bus_user_receipt
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="recipient != null" >
+        RECIPIENT = #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNum != null" >
+        EXPRESS_NUM = #{expressNum,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCompany != null" >
+        EXPRESS_COMPANY = #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null" >
+        BILL_TYPE = #{billType,jdbcType=SMALLINT},
+      </if>
+      <if test="billHead != null" >
+        BILL_HEAD = #{billHead,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        MONEY = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        TIME = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validRemark != null" >
+        VALID_REMARK = #{validRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.bus.BusUserReceipt" >
+    update bus_user_receipt
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      RECIPIENT = #{recipient,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EXPRESS_NUM = #{expressNum,jdbcType=VARCHAR},
+      EXPRESS_COMPANY = #{expressCompany,jdbcType=VARCHAR},
+      BILL_TYPE = #{billType,jdbcType=SMALLINT},
+      BILL_HEAD = #{billHead,jdbcType=VARCHAR},
+      MONEY = #{money,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=SMALLINT},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      TIME = #{time,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      VALID_REMARK = #{validRemark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

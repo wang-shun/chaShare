@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.pob.PobChargingTempPileMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.pob.PobChargingTempPile" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PILE_CODE" property="pileCode" jdbcType="VARCHAR" />
+    <result column="PILE_NAME" property="pileName" jdbcType="VARCHAR" />
+    <result column="TEMP_STATION_ID" property="tempStationId" jdbcType="INTEGER" />
+    <result column="REAL_STATION_ID" property="realStationId" jdbcType="INTEGER" />
+    <result column="REAL_PILE_ID" property="realPileId" jdbcType="INTEGER" />
+    <result column="BUS_MEC" property="busMec" jdbcType="INTEGER" />
+    <result column="BUS_TYPE" property="busType" jdbcType="SMALLINT" />
+    <result column="STATUS" property="status" jdbcType="SMALLINT" />
+    <result column="PILE_TYPE" property="pileType" jdbcType="SMALLINT" />
+    <result column="PILE_MODEL" property="pileModel" jdbcType="INTEGER" />
+    <result column="INTF_TYPE" property="intfType" jdbcType="SMALLINT" />
+    <result column="CHA_WAY" property="chaWay" jdbcType="SMALLINT" />
+    <result column="COM_TYPE" property="comType" jdbcType="SMALLINT" />
+    <result column="COM_ADDR" property="comAddr" jdbcType="VARCHAR" />
+    <result column="COM_SUB_ADDR" property="comSubAddr" jdbcType="VARCHAR" />
+    <result column="IS_APP" property="isApp" jdbcType="SMALLINT" />
+    <result column="IS_TIME_CHA" property="isTimeCha" jdbcType="SMALLINT" />
+    <result column="IS_RATION_CHA" property="isRationCha" jdbcType="SMALLINT" />
+    <result column="IS_MONEY_CHA" property="isMoneyCha" jdbcType="SMALLINT" />
+    <result column="IS_CONTROL" property="isControl" jdbcType="SMALLINT" />
+    <result column="IS_CHA_LOAD" property="isChaLoad" jdbcType="SMALLINT" />
+    <result column="BUILD_TIME" property="buildTime" jdbcType="TIMESTAMP" />
+    <result column="DOC" property="doc" jdbcType="VARCHAR" />
+    <result column="IS_FEE" property="isFee" jdbcType="SMALLINT" />
+    <result column="FEE_RULE" property="feeRule" jdbcType="INTEGER" />
+    <result column="ACTIVE_TIME" property="activeTime" jdbcType="TIMESTAMP" />
+    <result column="CHARGE_FEE" property="chargeFee" jdbcType="DECIMAL" />
+    <result column="PARK_FEE" property="parkFee" jdbcType="DECIMAL" />
+    <result column="SERVICE_FEE" property="serviceFee" jdbcType="DECIMAL" />
+    <result column="PAY_WAY" property="payWay" jdbcType="CHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="IS_LOCK" property="isLock" jdbcType="SMALLINT" />
+    <result column="LOCK_CODE" property="lockCode" jdbcType="VARCHAR" />
+    <result column="SOFT_VERSION" property="softVersion" jdbcType="VARCHAR" />
+    <result column="HARD_VERSION" property="hardVersion" jdbcType="VARCHAR" />
+    <result column="REQUEST_TYPE" property="requestType" jdbcType="SMALLINT" />
+    <result column="VALID_STATUS" property="validStatus" jdbcType="SMALLINT" />
+    <result column="VALID_REMARK" property="validRemark" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="VALID_TIME" property="validTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PILE_CODE, PILE_NAME, TEMP_STATION_ID, REAL_STATION_ID, REAL_PILE_ID, BUS_MEC, 
+    BUS_TYPE, STATUS, PILE_TYPE, PILE_MODEL, INTF_TYPE, CHA_WAY, COM_TYPE, COM_ADDR, 
+    COM_SUB_ADDR, IS_APP, IS_TIME_CHA, IS_RATION_CHA, IS_MONEY_CHA, IS_CONTROL, IS_CHA_LOAD, 
+    BUILD_TIME, DOC, IS_FEE, FEE_RULE, ACTIVE_TIME, CHARGE_FEE, PARK_FEE, SERVICE_FEE, 
+    PAY_WAY, ADDRESS, IS_LOCK, LOCK_CODE, SOFT_VERSION, HARD_VERSION, REQUEST_TYPE, VALID_STATUS, 
+    VALID_REMARK, UPDATE_TIME, VALID_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.pob.PobChargingTempPileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pob_charging_temp_pile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pob_charging_temp_pile
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pob_charging_temp_pile
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.pob.PobChargingTempPileExample" >
+    delete from pob_charging_temp_pile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.pob.PobChargingTempPile" useGeneratedKeys="true" keyProperty="id">
+    insert into pob_charging_temp_pile (ID, PILE_CODE, PILE_NAME, 
+      TEMP_STATION_ID, REAL_STATION_ID, REAL_PILE_ID, 
+      BUS_MEC, BUS_TYPE, STATUS, 
+      PILE_TYPE, PILE_MODEL, INTF_TYPE, 
+      CHA_WAY, COM_TYPE, COM_ADDR, 
+      COM_SUB_ADDR, IS_APP, IS_TIME_CHA, 
+      IS_RATION_CHA, IS_MONEY_CHA, IS_CONTROL, 
+      IS_CHA_LOAD, BUILD_TIME, DOC, 
+      IS_FEE, FEE_RULE, ACTIVE_TIME, 
+      CHARGE_FEE, PARK_FEE, SERVICE_FEE, 
+      PAY_WAY, ADDRESS, IS_LOCK, 
+      LOCK_CODE, SOFT_VERSION, HARD_VERSION, 
+      REQUEST_TYPE, VALID_STATUS, VALID_REMARK, 
+      UPDATE_TIME, VALID_TIME)
+    values (#{id,jdbcType=INTEGER}, #{pileCode,jdbcType=VARCHAR}, #{pileName,jdbcType=VARCHAR}, 
+      #{tempStationId,jdbcType=INTEGER}, #{realStationId,jdbcType=INTEGER}, #{realPileId,jdbcType=INTEGER}, 
+      #{busMec,jdbcType=INTEGER}, #{busType,jdbcType=SMALLINT}, #{status,jdbcType=SMALLINT}, 
+      #{pileType,jdbcType=SMALLINT}, #{pileModel,jdbcType=INTEGER}, #{intfType,jdbcType=SMALLINT}, 
+      #{chaWay,jdbcType=SMALLINT}, #{comType,jdbcType=SMALLINT}, #{comAddr,jdbcType=VARCHAR}, 
+      #{comSubAddr,jdbcType=VARCHAR}, #{isApp,jdbcType=SMALLINT}, #{isTimeCha,jdbcType=SMALLINT}, 
+      #{isRationCha,jdbcType=SMALLINT}, #{isMoneyCha,jdbcType=SMALLINT}, #{isControl,jdbcType=SMALLINT}, 
+      #{isChaLoad,jdbcType=SMALLINT}, #{buildTime,jdbcType=TIMESTAMP}, #{doc,jdbcType=VARCHAR}, 
+      #{isFee,jdbcType=SMALLINT}, #{feeRule,jdbcType=INTEGER}, #{activeTime,jdbcType=TIMESTAMP}, 
+      #{chargeFee,jdbcType=DECIMAL}, #{parkFee,jdbcType=DECIMAL}, #{serviceFee,jdbcType=DECIMAL}, 
+      #{payWay,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{isLock,jdbcType=SMALLINT}, 
+      #{lockCode,jdbcType=VARCHAR}, #{softVersion,jdbcType=VARCHAR}, #{hardVersion,jdbcType=VARCHAR}, 
+      #{requestType,jdbcType=SMALLINT}, #{validStatus,jdbcType=SMALLINT}, #{validRemark,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{validTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.pob.PobChargingTempPile" useGeneratedKeys="true" keyProperty="id">
+    insert into pob_charging_temp_pile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="pileCode != null" >
+        PILE_CODE,
+      </if>
+      <if test="pileName != null" >
+        PILE_NAME,
+      </if>
+      <if test="tempStationId != null" >
+        TEMP_STATION_ID,
+      </if>
+      <if test="realStationId != null" >
+        REAL_STATION_ID,
+      </if>
+      <if test="realPileId != null" >
+        REAL_PILE_ID,
+      </if>
+      <if test="busMec != null" >
+        BUS_MEC,
+      </if>
+      <if test="busType != null" >
+        BUS_TYPE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="pileType != null" >
+        PILE_TYPE,
+      </if>
+      <if test="pileModel != null" >
+        PILE_MODEL,
+      </if>
+      <if test="intfType != null" >
+        INTF_TYPE,
+      </if>
+      <if test="chaWay != null" >
+        CHA_WAY,
+      </if>
+      <if test="comType != null" >
+        COM_TYPE,
+      </if>
+      <if test="comAddr != null" >
+        COM_ADDR,
+      </if>
+      <if test="comSubAddr != null" >
+        COM_SUB_ADDR,
+      </if>
+      <if test="isApp != null" >
+        IS_APP,
+      </if>
+      <if test="isTimeCha != null" >
+        IS_TIME_CHA,
+      </if>
+      <if test="isRationCha != null" >
+        IS_RATION_CHA,
+      </if>
+      <if test="isMoneyCha != null" >
+        IS_MONEY_CHA,
+      </if>
+      <if test="isControl != null" >
+        IS_CONTROL,
+      </if>
+      <if test="isChaLoad != null" >
+        IS_CHA_LOAD,
+      </if>
+      <if test="buildTime != null" >
+        BUILD_TIME,
+      </if>
+      <if test="doc != null" >
+        DOC,
+      </if>
+      <if test="isFee != null" >
+        IS_FEE,
+      </if>
+      <if test="feeRule != null" >
+        FEE_RULE,
+      </if>
+      <if test="activeTime != null" >
+        ACTIVE_TIME,
+      </if>
+      <if test="chargeFee != null" >
+        CHARGE_FEE,
+      </if>
+      <if test="parkFee != null" >
+        PARK_FEE,
+      </if>
+      <if test="serviceFee != null" >
+        SERVICE_FEE,
+      </if>
+      <if test="payWay != null" >
+        PAY_WAY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="isLock != null" >
+        IS_LOCK,
+      </if>
+      <if test="lockCode != null" >
+        LOCK_CODE,
+      </if>
+      <if test="softVersion != null" >
+        SOFT_VERSION,
+      </if>
+      <if test="hardVersion != null" >
+        HARD_VERSION,
+      </if>
+      <if test="requestType != null" >
+        REQUEST_TYPE,
+      </if>
+      <if test="validStatus != null" >
+        VALID_STATUS,
+      </if>
+      <if test="validRemark != null" >
+        VALID_REMARK,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="validTime != null" >
+        VALID_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pileCode != null" >
+        #{pileCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pileName != null" >
+        #{pileName,jdbcType=VARCHAR},
+      </if>
+      <if test="tempStationId != null" >
+        #{tempStationId,jdbcType=INTEGER},
+      </if>
+      <if test="realStationId != null" >
+        #{realStationId,jdbcType=INTEGER},
+      </if>
+      <if test="realPileId != null" >
+        #{realPileId,jdbcType=INTEGER},
+      </if>
+      <if test="busMec != null" >
+        #{busMec,jdbcType=INTEGER},
+      </if>
+      <if test="busType != null" >
+        #{busType,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="pileType != null" >
+        #{pileType,jdbcType=SMALLINT},
+      </if>
+      <if test="pileModel != null" >
+        #{pileModel,jdbcType=INTEGER},
+      </if>
+      <if test="intfType != null" >
+        #{intfType,jdbcType=SMALLINT},
+      </if>
+      <if test="chaWay != null" >
+        #{chaWay,jdbcType=SMALLINT},
+      </if>
+      <if test="comType != null" >
+        #{comType,jdbcType=SMALLINT},
+      </if>
+      <if test="comAddr != null" >
+        #{comAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="comSubAddr != null" >
+        #{comSubAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="isApp != null" >
+        #{isApp,jdbcType=SMALLINT},
+      </if>
+      <if test="isTimeCha != null" >
+        #{isTimeCha,jdbcType=SMALLINT},
+      </if>
+      <if test="isRationCha != null" >
+        #{isRationCha,jdbcType=SMALLINT},
+      </if>
+      <if test="isMoneyCha != null" >
+        #{isMoneyCha,jdbcType=SMALLINT},
+      </if>
+      <if test="isControl != null" >
+        #{isControl,jdbcType=SMALLINT},
+      </if>
+      <if test="isChaLoad != null" >
+        #{isChaLoad,jdbcType=SMALLINT},
+      </if>
+      <if test="buildTime != null" >
+        #{buildTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doc != null" >
+        #{doc,jdbcType=VARCHAR},
+      </if>
+      <if test="isFee != null" >
+        #{isFee,jdbcType=SMALLINT},
+      </if>
+      <if test="feeRule != null" >
+        #{feeRule,jdbcType=INTEGER},
+      </if>
+      <if test="activeTime != null" >
+        #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chargeFee != null" >
+        #{chargeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="parkFee != null" >
+        #{parkFee,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceFee != null" >
+        #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="payWay != null" >
+        #{payWay,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        #{isLock,jdbcType=SMALLINT},
+      </if>
+      <if test="lockCode != null" >
+        #{lockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="softVersion != null" >
+        #{softVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="hardVersion != null" >
+        #{hardVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="requestType != null" >
+        #{requestType,jdbcType=SMALLINT},
+      </if>
+      <if test="validStatus != null" >
+        #{validStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="validRemark != null" >
+        #{validRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTime != null" >
+        #{validTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.pob.PobChargingTempPileExample" resultType="java.lang.Integer" >
+    select count(*) from pob_charging_temp_pile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pob_charging_temp_pile
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pileCode != null" >
+        PILE_CODE = #{record.pileCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pileName != null" >
+        PILE_NAME = #{record.pileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tempStationId != null" >
+        TEMP_STATION_ID = #{record.tempStationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.realStationId != null" >
+        REAL_STATION_ID = #{record.realStationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.realPileId != null" >
+        REAL_PILE_ID = #{record.realPileId,jdbcType=INTEGER},
+      </if>
+      <if test="record.busMec != null" >
+        BUS_MEC = #{record.busMec,jdbcType=INTEGER},
+      </if>
+      <if test="record.busType != null" >
+        BUS_TYPE = #{record.busType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.pileType != null" >
+        PILE_TYPE = #{record.pileType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.pileModel != null" >
+        PILE_MODEL = #{record.pileModel,jdbcType=INTEGER},
+      </if>
+      <if test="record.intfType != null" >
+        INTF_TYPE = #{record.intfType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.chaWay != null" >
+        CHA_WAY = #{record.chaWay,jdbcType=SMALLINT},
+      </if>
+      <if test="record.comType != null" >
+        COM_TYPE = #{record.comType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.comAddr != null" >
+        COM_ADDR = #{record.comAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comSubAddr != null" >
+        COM_SUB_ADDR = #{record.comSubAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isApp != null" >
+        IS_APP = #{record.isApp,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isTimeCha != null" >
+        IS_TIME_CHA = #{record.isTimeCha,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isRationCha != null" >
+        IS_RATION_CHA = #{record.isRationCha,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isMoneyCha != null" >
+        IS_MONEY_CHA = #{record.isMoneyCha,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isControl != null" >
+        IS_CONTROL = #{record.isControl,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isChaLoad != null" >
+        IS_CHA_LOAD = #{record.isChaLoad,jdbcType=SMALLINT},
+      </if>
+      <if test="record.buildTime != null" >
+        BUILD_TIME = #{record.buildTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.doc != null" >
+        DOC = #{record.doc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFee != null" >
+        IS_FEE = #{record.isFee,jdbcType=SMALLINT},
+      </if>
+      <if test="record.feeRule != null" >
+        FEE_RULE = #{record.feeRule,jdbcType=INTEGER},
+      </if>
+      <if test="record.activeTime != null" >
+        ACTIVE_TIME = #{record.activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chargeFee != null" >
+        CHARGE_FEE = #{record.chargeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parkFee != null" >
+        PARK_FEE = #{record.parkFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serviceFee != null" >
+        SERVICE_FEE = #{record.serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payWay != null" >
+        PAY_WAY = #{record.payWay,jdbcType=CHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLock != null" >
+        IS_LOCK = #{record.isLock,jdbcType=SMALLINT},
+      </if>
+      <if test="record.lockCode != null" >
+        LOCK_CODE = #{record.lockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softVersion != null" >
+        SOFT_VERSION = #{record.softVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hardVersion != null" >
+        HARD_VERSION = #{record.hardVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestType != null" >
+        REQUEST_TYPE = #{record.requestType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.validStatus != null" >
+        VALID_STATUS = #{record.validStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.validRemark != null" >
+        VALID_REMARK = #{record.validRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.validTime != null" >
+        VALID_TIME = #{record.validTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pob_charging_temp_pile
+    set ID = #{record.id,jdbcType=INTEGER},
+      PILE_CODE = #{record.pileCode,jdbcType=VARCHAR},
+      PILE_NAME = #{record.pileName,jdbcType=VARCHAR},
+      TEMP_STATION_ID = #{record.tempStationId,jdbcType=INTEGER},
+      REAL_STATION_ID = #{record.realStationId,jdbcType=INTEGER},
+      REAL_PILE_ID = #{record.realPileId,jdbcType=INTEGER},
+      BUS_MEC = #{record.busMec,jdbcType=INTEGER},
+      BUS_TYPE = #{record.busType,jdbcType=SMALLINT},
+      STATUS = #{record.status,jdbcType=SMALLINT},
+      PILE_TYPE = #{record.pileType,jdbcType=SMALLINT},
+      PILE_MODEL = #{record.pileModel,jdbcType=INTEGER},
+      INTF_TYPE = #{record.intfType,jdbcType=SMALLINT},
+      CHA_WAY = #{record.chaWay,jdbcType=SMALLINT},
+      COM_TYPE = #{record.comType,jdbcType=SMALLINT},
+      COM_ADDR = #{record.comAddr,jdbcType=VARCHAR},
+      COM_SUB_ADDR = #{record.comSubAddr,jdbcType=VARCHAR},
+      IS_APP = #{record.isApp,jdbcType=SMALLINT},
+      IS_TIME_CHA = #{record.isTimeCha,jdbcType=SMALLINT},
+      IS_RATION_CHA = #{record.isRationCha,jdbcType=SMALLINT},
+      IS_MONEY_CHA = #{record.isMoneyCha,jdbcType=SMALLINT},
+      IS_CONTROL = #{record.isControl,jdbcType=SMALLINT},
+      IS_CHA_LOAD = #{record.isChaLoad,jdbcType=SMALLINT},
+      BUILD_TIME = #{record.buildTime,jdbcType=TIMESTAMP},
+      DOC = #{record.doc,jdbcType=VARCHAR},
+      IS_FEE = #{record.isFee,jdbcType=SMALLINT},
+      FEE_RULE = #{record.feeRule,jdbcType=INTEGER},
+      ACTIVE_TIME = #{record.activeTime,jdbcType=TIMESTAMP},
+      CHARGE_FEE = #{record.chargeFee,jdbcType=DECIMAL},
+      PARK_FEE = #{record.parkFee,jdbcType=DECIMAL},
+      SERVICE_FEE = #{record.serviceFee,jdbcType=DECIMAL},
+      PAY_WAY = #{record.payWay,jdbcType=CHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      IS_LOCK = #{record.isLock,jdbcType=SMALLINT},
+      LOCK_CODE = #{record.lockCode,jdbcType=VARCHAR},
+      SOFT_VERSION = #{record.softVersion,jdbcType=VARCHAR},
+      HARD_VERSION = #{record.hardVersion,jdbcType=VARCHAR},
+      REQUEST_TYPE = #{record.requestType,jdbcType=SMALLINT},
+      VALID_STATUS = #{record.validStatus,jdbcType=SMALLINT},
+      VALID_REMARK = #{record.validRemark,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      VALID_TIME = #{record.validTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.pob.PobChargingTempPile" >
+    update pob_charging_temp_pile
+    <set >
+      <if test="pileCode != null" >
+        PILE_CODE = #{pileCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pileName != null" >
+        PILE_NAME = #{pileName,jdbcType=VARCHAR},
+      </if>
+      <if test="tempStationId != null" >
+        TEMP_STATION_ID = #{tempStationId,jdbcType=INTEGER},
+      </if>
+      <if test="realStationId != null" >
+        REAL_STATION_ID = #{realStationId,jdbcType=INTEGER},
+      </if>
+      <if test="realPileId != null" >
+        REAL_PILE_ID = #{realPileId,jdbcType=INTEGER},
+      </if>
+      <if test="busMec != null" >
+        BUS_MEC = #{busMec,jdbcType=INTEGER},
+      </if>
+      <if test="busType != null" >
+        BUS_TYPE = #{busType,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="pileType != null" >
+        PILE_TYPE = #{pileType,jdbcType=SMALLINT},
+      </if>
+      <if test="pileModel != null" >
+        PILE_MODEL = #{pileModel,jdbcType=INTEGER},
+      </if>
+      <if test="intfType != null" >
+        INTF_TYPE = #{intfType,jdbcType=SMALLINT},
+      </if>
+      <if test="chaWay != null" >
+        CHA_WAY = #{chaWay,jdbcType=SMALLINT},
+      </if>
+      <if test="comType != null" >
+        COM_TYPE = #{comType,jdbcType=SMALLINT},
+      </if>
+      <if test="comAddr != null" >
+        COM_ADDR = #{comAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="comSubAddr != null" >
+        COM_SUB_ADDR = #{comSubAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="isApp != null" >
+        IS_APP = #{isApp,jdbcType=SMALLINT},
+      </if>
+      <if test="isTimeCha != null" >
+        IS_TIME_CHA = #{isTimeCha,jdbcType=SMALLINT},
+      </if>
+      <if test="isRationCha != null" >
+        IS_RATION_CHA = #{isRationCha,jdbcType=SMALLINT},
+      </if>
+      <if test="isMoneyCha != null" >
+        IS_MONEY_CHA = #{isMoneyCha,jdbcType=SMALLINT},
+      </if>
+      <if test="isControl != null" >
+        IS_CONTROL = #{isControl,jdbcType=SMALLINT},
+      </if>
+      <if test="isChaLoad != null" >
+        IS_CHA_LOAD = #{isChaLoad,jdbcType=SMALLINT},
+      </if>
+      <if test="buildTime != null" >
+        BUILD_TIME = #{buildTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doc != null" >
+        DOC = #{doc,jdbcType=VARCHAR},
+      </if>
+      <if test="isFee != null" >
+        IS_FEE = #{isFee,jdbcType=SMALLINT},
+      </if>
+      <if test="feeRule != null" >
+        FEE_RULE = #{feeRule,jdbcType=INTEGER},
+      </if>
+      <if test="activeTime != null" >
+        ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chargeFee != null" >
+        CHARGE_FEE = #{chargeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="parkFee != null" >
+        PARK_FEE = #{parkFee,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceFee != null" >
+        SERVICE_FEE = #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="payWay != null" >
+        PAY_WAY = #{payWay,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        IS_LOCK = #{isLock,jdbcType=SMALLINT},
+      </if>
+      <if test="lockCode != null" >
+        LOCK_CODE = #{lockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="softVersion != null" >
+        SOFT_VERSION = #{softVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="hardVersion != null" >
+        HARD_VERSION = #{hardVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="requestType != null" >
+        REQUEST_TYPE = #{requestType,jdbcType=SMALLINT},
+      </if>
+      <if test="validStatus != null" >
+        VALID_STATUS = #{validStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="validRemark != null" >
+        VALID_REMARK = #{validRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTime != null" >
+        VALID_TIME = #{validTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.pob.PobChargingTempPile" >
+    update pob_charging_temp_pile
+    set PILE_CODE = #{pileCode,jdbcType=VARCHAR},
+      PILE_NAME = #{pileName,jdbcType=VARCHAR},
+      TEMP_STATION_ID = #{tempStationId,jdbcType=INTEGER},
+      REAL_STATION_ID = #{realStationId,jdbcType=INTEGER},
+      REAL_PILE_ID = #{realPileId,jdbcType=INTEGER},
+      BUS_MEC = #{busMec,jdbcType=INTEGER},
+      BUS_TYPE = #{busType,jdbcType=SMALLINT},
+      STATUS = #{status,jdbcType=SMALLINT},
+      PILE_TYPE = #{pileType,jdbcType=SMALLINT},
+      PILE_MODEL = #{pileModel,jdbcType=INTEGER},
+      INTF_TYPE = #{intfType,jdbcType=SMALLINT},
+      CHA_WAY = #{chaWay,jdbcType=SMALLINT},
+      COM_TYPE = #{comType,jdbcType=SMALLINT},
+      COM_ADDR = #{comAddr,jdbcType=VARCHAR},
+      COM_SUB_ADDR = #{comSubAddr,jdbcType=VARCHAR},
+      IS_APP = #{isApp,jdbcType=SMALLINT},
+      IS_TIME_CHA = #{isTimeCha,jdbcType=SMALLINT},
+      IS_RATION_CHA = #{isRationCha,jdbcType=SMALLINT},
+      IS_MONEY_CHA = #{isMoneyCha,jdbcType=SMALLINT},
+      IS_CONTROL = #{isControl,jdbcType=SMALLINT},
+      IS_CHA_LOAD = #{isChaLoad,jdbcType=SMALLINT},
+      BUILD_TIME = #{buildTime,jdbcType=TIMESTAMP},
+      DOC = #{doc,jdbcType=VARCHAR},
+      IS_FEE = #{isFee,jdbcType=SMALLINT},
+      FEE_RULE = #{feeRule,jdbcType=INTEGER},
+      ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
+      CHARGE_FEE = #{chargeFee,jdbcType=DECIMAL},
+      PARK_FEE = #{parkFee,jdbcType=DECIMAL},
+      SERVICE_FEE = #{serviceFee,jdbcType=DECIMAL},
+      PAY_WAY = #{payWay,jdbcType=CHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      IS_LOCK = #{isLock,jdbcType=SMALLINT},
+      LOCK_CODE = #{lockCode,jdbcType=VARCHAR},
+      SOFT_VERSION = #{softVersion,jdbcType=VARCHAR},
+      HARD_VERSION = #{hardVersion,jdbcType=VARCHAR},
+      REQUEST_TYPE = #{requestType,jdbcType=SMALLINT},
+      VALID_STATUS = #{validStatus,jdbcType=SMALLINT},
+      VALID_REMARK = #{validRemark,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      VALID_TIME = #{validTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

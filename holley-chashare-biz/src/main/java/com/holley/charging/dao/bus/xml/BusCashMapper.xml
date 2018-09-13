@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.bus.BusCashMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.bus.BusCash" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="MONEY" property="money" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="VALID_TIME" property="validTime" jdbcType="TIMESTAMP" />
+    <result column="VALID_REMARK" property="validRemark" jdbcType="VARCHAR" />
+    <result column="VALID_STATUS" property="validStatus" jdbcType="SMALLINT" />
+    <result column="CASH_WAY" property="cashWay" jdbcType="SMALLINT" />
+    <result column="ACCOUNT_INFO" property="accountInfo" jdbcType="VARCHAR" />
+    <result column="CASH_STATUS" property="cashStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, MONEY, REMARK, ADD_TIME, VALID_TIME, VALID_REMARK, VALID_STATUS, CASH_WAY, 
+    ACCOUNT_INFO, CASH_STATUS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusCashExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_cash
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_cash
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+    <!-- 分页查询所有提现记录 -->
+  <select id="selectBusCashByPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select  
+  	bcash.*
+  	from bus_cash bcash 
+  	left join bus_user buser 
+  	on bcash.USER_ID=buser.ID
+  	where buser.INFO_ID=#{infoId,jdbcType=INTEGER}
+  <if test="year != null">
+ 	and year(bcash.ADD_TIME) = #{year}
+  </if>
+  <if test="year != null">
+ 	and month(bcash.ADD_TIME) = #{month}
+  </if>
+  order by bcash.ADD_TIME desc
+  <if test="maxLimit != null">
+  limit #{maxLimit}
+  </if>
+  </select>
+      <!-- 导出提现记录Excel -->
+  <select id="exportCashs" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select  
+  	bcash.*
+  	from bus_cash bcash 
+  	left join bus_user buser 
+  	on bcash.USER_ID=buser.ID
+  	where buser.INFO_ID=#{infoId,jdbcType=INTEGER}
+  <if test="year != null">
+ 	and year(bcash.ADD_TIME) = #{year}
+  </if>
+  <if test="year != null">
+ 	and month(bcash.ADD_TIME) = #{month}
+  </if>
+  <if test="startTime != null">
+  	and bcash.ADD_TIME &gt;= #{startTime}
+  </if>
+  <if test="endTime != null">
+     and bcash.ADD_TIME &lt;= #{endTime}
+  </if>
+  order by bcash.ADD_TIME desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus_cash
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.bus.BusCashExample" >
+    delete from bus_cash
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.bus.BusCash" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_cash (ID, USER_ID, MONEY, 
+      REMARK, ADD_TIME, VALID_TIME, 
+      VALID_REMARK, VALID_STATUS, CASH_WAY, 
+      ACCOUNT_INFO, CASH_STATUS)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{validTime,jdbcType=TIMESTAMP}, 
+      #{validRemark,jdbcType=VARCHAR}, #{validStatus,jdbcType=SMALLINT}, #{cashWay,jdbcType=SMALLINT}, 
+      #{accountInfo,jdbcType=VARCHAR}, #{cashStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.bus.BusCash" useGeneratedKeys="true" keyProperty="id">
+    insert into bus_cash
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="money != null" >
+        MONEY,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="validTime != null" >
+        VALID_TIME,
+      </if>
+      <if test="validRemark != null" >
+        VALID_REMARK,
+      </if>
+      <if test="validStatus != null" >
+        VALID_STATUS,
+      </if>
+      <if test="cashWay != null" >
+        CASH_WAY,
+      </if>
+      <if test="accountInfo != null" >
+        ACCOUNT_INFO,
+      </if>
+      <if test="cashStatus != null" >
+        CASH_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTime != null" >
+        #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validRemark != null" >
+        #{validRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null" >
+        #{validStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="cashWay != null" >
+        #{cashWay,jdbcType=SMALLINT},
+      </if>
+      <if test="accountInfo != null" >
+        #{accountInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="cashStatus != null" >
+        #{cashStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.bus.BusCashExample" resultType="java.lang.Integer" >
+    select count(*) from bus_cash
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_cash
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.money != null" >
+        MONEY = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.validTime != null" >
+        VALID_TIME = #{record.validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.validRemark != null" >
+        VALID_REMARK = #{record.validRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validStatus != null" >
+        VALID_STATUS = #{record.validStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.cashWay != null" >
+        CASH_WAY = #{record.cashWay,jdbcType=SMALLINT},
+      </if>
+      <if test="record.accountInfo != null" >
+        ACCOUNT_INFO = #{record.accountInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cashStatus != null" >
+        CASH_STATUS = #{record.cashStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_cash
+    set ID = #{record.id,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      MONEY = #{record.money,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      VALID_TIME = #{record.validTime,jdbcType=TIMESTAMP},
+      VALID_REMARK = #{record.validRemark,jdbcType=VARCHAR},
+      VALID_STATUS = #{record.validStatus,jdbcType=SMALLINT},
+      CASH_WAY = #{record.cashWay,jdbcType=SMALLINT},
+      ACCOUNT_INFO = #{record.accountInfo,jdbcType=VARCHAR},
+      CASH_STATUS = #{record.cashStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.bus.BusCash" >
+    update bus_cash
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        MONEY = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTime != null" >
+        VALID_TIME = #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validRemark != null" >
+        VALID_REMARK = #{validRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null" >
+        VALID_STATUS = #{validStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="cashWay != null" >
+        CASH_WAY = #{cashWay,jdbcType=SMALLINT},
+      </if>
+      <if test="accountInfo != null" >
+        ACCOUNT_INFO = #{accountInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="cashStatus != null" >
+        CASH_STATUS = #{cashStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.bus.BusCash" >
+    update bus_cash
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      MONEY = #{money,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      VALID_TIME = #{validTime,jdbcType=TIMESTAMP},
+      VALID_REMARK = #{validRemark,jdbcType=VARCHAR},
+      VALID_STATUS = #{validStatus,jdbcType=SMALLINT},
+      CASH_WAY = #{cashWay,jdbcType=SMALLINT},
+      ACCOUNT_INFO = #{accountInfo,jdbcType=VARCHAR},
+      CASH_STATUS = #{cashStatus,jdbcType=SMALLINT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

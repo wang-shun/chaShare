@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.charging.dao.bus.BusPaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.charging.model.bus.BusPayment" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="PILE_ID" property="pileId" jdbcType="INTEGER" />
+    <result column="TRADE_NO" property="tradeNo" jdbcType="VARCHAR" />
+    <result column="CHA_MODE" property="chaMode" jdbcType="SMALLINT" />
+    <result column="DEAL_STATUS" property="dealStatus" jdbcType="SMALLINT" />
+    <result column="PARK_FEE" property="parkFee" jdbcType="DECIMAL" />
+    <result column="CHA_FEE" property="chaFee" jdbcType="DECIMAL" />
+    <result column="SERVICE_FEE" property="serviceFee" jdbcType="DECIMAL" />
+    <result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="CHA_LEN" property="chaLen" jdbcType="INTEGER" />
+    <result column="CHA_POWER" property="chaPower" jdbcType="DOUBLE" />
+    <result column="SHOULD_MONEY" property="shouldMoney" jdbcType="DECIMAL" />
+    <result column="ACTUAL_MONEY" property="actualMoney" jdbcType="DECIMAL" />
+    <result column="PAY_WAY" property="payWay" jdbcType="SMALLINT" />
+    <result column="ACCOUNT_INFO" property="accountInfo" jdbcType="VARCHAR" />
+    <result column="PAY_STATUS" property="payStatus" jdbcType="SMALLINT" />
+    <result column="IS_BILL" property="isBill" jdbcType="SMALLINT" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, PILE_ID, TRADE_NO, CHA_MODE, DEAL_STATUS, PARK_FEE, CHA_FEE, SERVICE_FEE, 
+    START_TIME, END_TIME, CHA_LEN, CHA_POWER, SHOULD_MONEY, ACTUAL_MONEY, PAY_WAY, ACCOUNT_INFO, 
+    PAY_STATUS, IS_BILL, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.charging.model.bus.BusPaymentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_payment
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus_payment
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.charging.model.bus.BusPaymentExample" >
+    delete from bus_payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.charging.model.bus.BusPayment" >
+    insert into bus_payment (ID, USER_ID, PILE_ID, 
+      TRADE_NO, CHA_MODE, DEAL_STATUS, 
+      PARK_FEE, CHA_FEE, SERVICE_FEE, 
+      START_TIME, END_TIME, CHA_LEN, 
+      CHA_POWER, SHOULD_MONEY, ACTUAL_MONEY, 
+      PAY_WAY, ACCOUNT_INFO, PAY_STATUS, 
+      IS_BILL, UPDATE_TIME)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{pileId,jdbcType=INTEGER}, 
+      #{tradeNo,jdbcType=VARCHAR}, #{chaMode,jdbcType=SMALLINT}, #{dealStatus,jdbcType=SMALLINT}, 
+      #{parkFee,jdbcType=DECIMAL}, #{chaFee,jdbcType=DECIMAL}, #{serviceFee,jdbcType=DECIMAL}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{chaLen,jdbcType=INTEGER}, 
+      #{chaPower,jdbcType=DOUBLE}, #{shouldMoney,jdbcType=DECIMAL}, #{actualMoney,jdbcType=DECIMAL}, 
+      #{payWay,jdbcType=SMALLINT}, #{accountInfo,jdbcType=VARCHAR}, #{payStatus,jdbcType=SMALLINT}, 
+      #{isBill,jdbcType=SMALLINT}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.charging.model.bus.BusPayment" >
+    insert into bus_payment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="pileId != null" >
+        PILE_ID,
+      </if>
+      <if test="tradeNo != null" >
+        TRADE_NO,
+      </if>
+      <if test="chaMode != null" >
+        CHA_MODE,
+      </if>
+      <if test="dealStatus != null" >
+        DEAL_STATUS,
+      </if>
+      <if test="parkFee != null" >
+        PARK_FEE,
+      </if>
+      <if test="chaFee != null" >
+        CHA_FEE,
+      </if>
+      <if test="serviceFee != null" >
+        SERVICE_FEE,
+      </if>
+      <if test="startTime != null" >
+        START_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="chaLen != null" >
+        CHA_LEN,
+      </if>
+      <if test="chaPower != null" >
+        CHA_POWER,
+      </if>
+      <if test="shouldMoney != null" >
+        SHOULD_MONEY,
+      </if>
+      <if test="actualMoney != null" >
+        ACTUAL_MONEY,
+      </if>
+      <if test="payWay != null" >
+        PAY_WAY,
+      </if>
+      <if test="accountInfo != null" >
+        ACCOUNT_INFO,
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS,
+      </if>
+      <if test="isBill != null" >
+        IS_BILL,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="pileId != null" >
+        #{pileId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNo != null" >
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="chaMode != null" >
+        #{chaMode,jdbcType=SMALLINT},
+      </if>
+      <if test="dealStatus != null" >
+        #{dealStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="parkFee != null" >
+        #{parkFee,jdbcType=DECIMAL},
+      </if>
+      <if test="chaFee != null" >
+        #{chaFee,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceFee != null" >
+        #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chaLen != null" >
+        #{chaLen,jdbcType=INTEGER},
+      </if>
+      <if test="chaPower != null" >
+        #{chaPower,jdbcType=DOUBLE},
+      </if>
+      <if test="shouldMoney != null" >
+        #{shouldMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="actualMoney != null" >
+        #{actualMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="payWay != null" >
+        #{payWay,jdbcType=SMALLINT},
+      </if>
+      <if test="accountInfo != null" >
+        #{accountInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="isBill != null" >
+        #{isBill,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.charging.model.bus.BusPaymentExample" resultType="java.lang.Integer" >
+    select count(*) from bus_payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_payment
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pileId != null" >
+        PILE_ID = #{record.pileId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tradeNo != null" >
+        TRADE_NO = #{record.tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chaMode != null" >
+        CHA_MODE = #{record.chaMode,jdbcType=SMALLINT},
+      </if>
+      <if test="record.dealStatus != null" >
+        DEAL_STATUS = #{record.dealStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.parkFee != null" >
+        PARK_FEE = #{record.parkFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chaFee != null" >
+        CHA_FEE = #{record.chaFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serviceFee != null" >
+        SERVICE_FEE = #{record.serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chaLen != null" >
+        CHA_LEN = #{record.chaLen,jdbcType=INTEGER},
+      </if>
+      <if test="record.chaPower != null" >
+        CHA_POWER = #{record.chaPower,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shouldMoney != null" >
+        SHOULD_MONEY = #{record.shouldMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.actualMoney != null" >
+        ACTUAL_MONEY = #{record.actualMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payWay != null" >
+        PAY_WAY = #{record.payWay,jdbcType=SMALLINT},
+      </if>
+      <if test="record.accountInfo != null" >
+        ACCOUNT_INFO = #{record.accountInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payStatus != null" >
+        PAY_STATUS = #{record.payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isBill != null" >
+        IS_BILL = #{record.isBill,jdbcType=SMALLINT},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_payment
+    set ID = #{record.id,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      PILE_ID = #{record.pileId,jdbcType=INTEGER},
+      TRADE_NO = #{record.tradeNo,jdbcType=VARCHAR},
+      CHA_MODE = #{record.chaMode,jdbcType=SMALLINT},
+      DEAL_STATUS = #{record.dealStatus,jdbcType=SMALLINT},
+      PARK_FEE = #{record.parkFee,jdbcType=DECIMAL},
+      CHA_FEE = #{record.chaFee,jdbcType=DECIMAL},
+      SERVICE_FEE = #{record.serviceFee,jdbcType=DECIMAL},
+      START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      CHA_LEN = #{record.chaLen,jdbcType=INTEGER},
+      CHA_POWER = #{record.chaPower,jdbcType=DOUBLE},
+      SHOULD_MONEY = #{record.shouldMoney,jdbcType=DECIMAL},
+      ACTUAL_MONEY = #{record.actualMoney,jdbcType=DECIMAL},
+      PAY_WAY = #{record.payWay,jdbcType=SMALLINT},
+      ACCOUNT_INFO = #{record.accountInfo,jdbcType=VARCHAR},
+      PAY_STATUS = #{record.payStatus,jdbcType=SMALLINT},
+      IS_BILL = #{record.isBill,jdbcType=SMALLINT},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.charging.model.bus.BusPayment" >
+    update bus_payment
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="pileId != null" >
+        PILE_ID = #{pileId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNo != null" >
+        TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="chaMode != null" >
+        CHA_MODE = #{chaMode,jdbcType=SMALLINT},
+      </if>
+      <if test="dealStatus != null" >
+        DEAL_STATUS = #{dealStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="parkFee != null" >
+        PARK_FEE = #{parkFee,jdbcType=DECIMAL},
+      </if>
+      <if test="chaFee != null" >
+        CHA_FEE = #{chaFee,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceFee != null" >
+        SERVICE_FEE = #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="startTime != null" >
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chaLen != null" >
+        CHA_LEN = #{chaLen,jdbcType=INTEGER},
+      </if>
+      <if test="chaPower != null" >
+        CHA_POWER = #{chaPower,jdbcType=DOUBLE},
+      </if>
+      <if test="shouldMoney != null" >
+        SHOULD_MONEY = #{shouldMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="actualMoney != null" >
+        ACTUAL_MONEY = #{actualMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="payWay != null" >
+        PAY_WAY = #{payWay,jdbcType=SMALLINT},
+      </if>
+      <if test="accountInfo != null" >
+        ACCOUNT_INFO = #{accountInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS = #{payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="isBill != null" >
+        IS_BILL = #{isBill,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.charging.model.bus.BusPayment" >
+    update bus_payment
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      PILE_ID = #{pileId,jdbcType=INTEGER},
+      TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      CHA_MODE = #{chaMode,jdbcType=SMALLINT},
+      DEAL_STATUS = #{dealStatus,jdbcType=SMALLINT},
+      PARK_FEE = #{parkFee,jdbcType=DECIMAL},
+      CHA_FEE = #{chaFee,jdbcType=DECIMAL},
+      SERVICE_FEE = #{serviceFee,jdbcType=DECIMAL},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      CHA_LEN = #{chaLen,jdbcType=INTEGER},
+      CHA_POWER = #{chaPower,jdbcType=DOUBLE},
+      SHOULD_MONEY = #{shouldMoney,jdbcType=DECIMAL},
+      ACTUAL_MONEY = #{actualMoney,jdbcType=DECIMAL},
+      PAY_WAY = #{payWay,jdbcType=SMALLINT},
+      ACCOUNT_INFO = #{accountInfo,jdbcType=VARCHAR},
+      PAY_STATUS = #{payStatus,jdbcType=SMALLINT},
+      IS_BILL = #{isBill,jdbcType=SMALLINT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="queryEchongPushPayment" resultType="com.holley.charging.model.def.BusPaymentVo">
+  	SELECT 
+  	pay.ID id, pay.USER_ID userId, pay.PILE_ID pileId, pay.TRADE_NO tradeNo, pay.CHA_MODE chaMode, pay.DEAL_STATUS dealStatus, pay.PARK_FEE parkFee, pay.CHA_FEE chaFee, pay.SERVICE_FEE serviceFee, 
+    pay.START_TIME startTime, pay.END_TIME endTime, pay.CHA_LEN chaLen, pay.CHA_POWER chaPower, pay.SHOULD_MONEY shouldMoney, pay.ACTUAL_MONEY actualMoney, pay.PAY_WAY payWay, pay.ACCOUNT_INFO accountInfo, 
+    pay.PAY_STATUS payStatus, pay.IS_BILL isBill, pay.UPDATE_TIME updateTime,pile.PILE_CODE pileCode 
+  	FROM bus_payment pay 
+  	LEFT JOIN pob_charging_pile pile
+	ON pay.PILE_ID = pile.ID
+	WHERE pay.END_TIME IS NOT NULL
+	AND pay.USER_ID &lt; 0
+	<if test="tradeKey != null">
+		AND pay.TRADE_NO LIKE CONCAT('%',#{tradeKey},'%')  
+	</if>
+	<if test="dealStatus != null">
+		AND pay.DEAL_STATUS=#{dealStatus}
+	</if>
+	<if test="payStatus != null">
+		AND pay.PAY_STATUS=#{payStatus}
+	</if>
+	<if test="isBill">
+		AND pay.IS_BILL=#{isBill}
+	</if>
+  </select>
+  <select id="queryCheckCheckTrade" resultType="java.lang.String">
+	  SELECT  DATE_FORMAT(UPDATE_TIME,"%Y-%m-%d") dateTime 
+	  FROM bus_payment  
+	  WHERE 
+	  TRADE_NO LIKE CONCAT('%',348375727,'%')  
+	  AND IS_BILL=3 
+	  AND DEAL_STATUS=2
+	  AND USER_ID &lt; 0
+	  GROUP BY dateTime
+  </select>
+</mapper>
